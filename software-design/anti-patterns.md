@@ -22,5 +22,13 @@ Jak to obejść?
 # Widoki
 W widokach powiina być tylko logika prezentacji
 
+Podział wzorców
+- Kreacyjne (opisują w jaki sposób obiekty są tworzone)
+- Strukturalne (opisują struktury powiązanych ze sobą obiektów)
+- Behawioralne (opisują zachowania i odpowiedzialności współpracujących ze sobą obiektów)
+
+Wzorce strukturalne MVC MVP MVVM(ModelViev-View-Model
+MVC
+![](https://geek.justjoin.it/wp-content/uploads/2019/04/1-1.png)
 
 https://pragmaticpineapple.com/introduction-to-ruby-on-rails-patterns-and-anti-patterns/
