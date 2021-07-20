@@ -146,7 +146,10 @@ end
 
 class User < ActiveRecord::Base
   has_one :employee
-  
+  Controllers put the C in MVC and are a fundamental part of the Rails framework.
+However, the relationship that many Rails programmers have with controllers is
+ complex.
+On one hand, controllers are categorically
   delegate :name, :address, to: employee, prefix: true
 end
 
@@ -154,3 +157,12 @@ end
 @employee.employee_address
 ```
 https://apidock.com/rails/Module/delegate
+
+### Controller
+### AntiPattern: Homemade Keys
+Problem
+Solution: Devise
+
+### AntiPattern: Fat Controller
+Jest jednym z najczęściej występujących antywzorców. Ale również jednym z łatwiejszych do naprawienia.
+Najczęśćiej mamy tam logikę biznesową i zapytania, które powinny należeć do modelu
