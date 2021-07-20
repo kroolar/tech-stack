@@ -1,5 +1,5 @@
 # Tech Stack
-[Polish version]('https://github.com/kroolar/tech-stack/pl/README.md')
+[Polish version]('https://github.com/kroolar/tech-stack/tree/master/pl')
 
 ### Ruby
 - [Method Lookup]('')
