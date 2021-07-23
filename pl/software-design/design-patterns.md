@@ -1,3 +1,52 @@
+### Adapter
+#### Typ: Wzorzec Strukturalny
+#### Kiedy stosować?
+- Gdy chcemy wykorzystać istniejącą klasę, ale jej interfejs nie jest kompatybilny z resztą programu
+
+#### Implementacja
+
+#### Zalety
+- Można oddzielić interfejs od logiki biznesowej (SRP)
+
+#### Wady
+- Zwiększona złożonośc kodu. Czasem lepiej zmienić adaptowaną klasę aby pasowała do reszty kodu
+
+#### Podobne wzorce
+
+#### Jak zaimplementować?
+- Zdefiniuj jak ma wyglądać komunikacja między klasami
+- 
+
+``` Ruby
+class Beer
+  attr_reader :name, :price
+
+  def initialize(brand:, price:)
+    @brand = brand
+    @price = price
+  end
+end
+
+class Bartender
+  def sell(amount: 1, product:)
+    product.price * amount
+  end
+end
+
+class Mug
+  def initialize(size:, value:)
+    @size = size
+    @value = @value
+  end
+end
+
+class MugAdapter < Mug
+  def price
+    @value * 3
+  end
+end
+```
+
 # Proxy
 ``` Ruby
 class Product
@@ -88,37 +137,7 @@ bar_one == bar_two # => true
 ```
 
 
-# Adapter
 
-``` Ruby
-class Beer
-  attr_reader :name, :price
-
-  def initialize(brand:, price:)
-    @brand = brand
-    @price = price
-  end
-end
-
-class Bartender
-  def sell(amount: 1, product:)
-    product.price * amount
-  end
-end
-
-class Mug
-  def initialize(size:, value:)
-    @size = size
-    @value = @value
-  end
-end
-
-class MugAdapter < Mug
-  def price
-    @value * 3
-  end
-end
-```
 
 # Builder
 
