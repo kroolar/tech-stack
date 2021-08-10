@@ -22,7 +22,6 @@ Wzorce projektowe są typowymi rozwiązaniami problemów, które często występ
   - Singleton
 
 - Kreacyjne
-  - Adapter
   - Bridge
   - Composite
   - Decorator
@@ -31,6 +30,7 @@ Wzorce projektowe są typowymi rozwiązaniami problemów, które często występ
   - Proxy
 
 - Structural
+  - [Adapter](design-patterns/adapter.md)
   - Chain of responsibility
   - Command
   - Iterator
