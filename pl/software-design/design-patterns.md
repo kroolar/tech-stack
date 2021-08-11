@@ -19,9 +19,9 @@ Wzorce projektowe są typowymi rozwiązaniami problemów, które często występ
   - Factory Method
   - Builder
   - Prototype
-  - Singleton
 
 - Kreacyjne
+  - [Singleton](design-patterns/singleton.md)
   - Bridge
   - Composite
   - Decorator
