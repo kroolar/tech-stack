@@ -17,10 +17,10 @@ Wzorce projektowe są typowymi rozwiązaniami problemów, które często występ
 #### List wzorców
 - Behawioralne
   - Factory Method
-  - Builder
   - Prototype
 
 - Kreacyjne
+  - [Builder](design-patterns/builder.md)
   - [Singleton](design-patterns/singleton.md)
   - Bridge
   - Composite
