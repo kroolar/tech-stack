@@ -27,7 +27,6 @@ Wzorce projektowe są typowymi rozwiązaniami problemów, które często występ
   - Decorator
   - Facade
   - Flyweight
-  - Proxy
 
 - Structural
   - [Adapter](design-patterns/adapter.md)
@@ -36,6 +35,7 @@ Wzorce projektowe są typowymi rozwiązaniami problemów, które często występ
   - Iterator
   - Mediator
   - [Memento](design-patterns/memento.md)
+  - [Proxy](design-patterns/proxy.md)
   - Observer
   - State
   - Strategy
