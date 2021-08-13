@@ -23,13 +23,13 @@ Wzorce projektowe są typowymi rozwiązaniami problemów, które często występ
   - [Builder](design-patterns/builder.md)
   - [Singleton](design-patterns/singleton.md)
   - Bridge
-  - Composite
   - Decorator
   - Facade
   - Flyweight
 
 - Structural
   - [Adapter](design-patterns/adapter.md)
+  - [Composite](design-patterns/composite.md)
   - Chain of responsibility
   - Command
   - Iterator
