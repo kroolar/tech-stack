@@ -79,9 +79,9 @@ end
 ```
 ### Rozwiązanie
 
-### ➕
-- Ułatwia pracę z drzewiastymi strukturami
+### Wady i Zalety
+➕ Ułatwia pracę z drzewiastymi strukturami
 
-### ➖
-- Ciężko zbudować wspólny interfejs
-- Przejrzystość kodu może się zmniejszyć
+➖ Ciężko zbudować wspólny interfejs
+
+➖ Przejrzystość kodu może się zmniejszyć
