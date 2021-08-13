@@ -7,6 +7,7 @@
 ### Problem
 
 ###
+```
 |_Prepare Order
   |_Make Dishes
   | |_Make Soup
@@ -21,6 +22,7 @@
   |_Package Dishes
     |_Box
     |_Label
+```
 
 ``` Ruby
 class Task
