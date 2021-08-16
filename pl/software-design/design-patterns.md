@@ -15,29 +15,31 @@ Wzorce projektowe są typowymi rozwiązaniami problemów, które często występ
  - **Behawioralne**: Skupiają się na algorytmach oraz podziale zadań między obiektami
 
 #### List wzorców
-- Behawioralne
-  - Factory Method
-  - Prototype
-
 - Kreacyjne
+  - Abstract Factory
   - [Builder](design-patterns/builder.md)
+  - Factory Method
   - [Singleton](design-patterns/singleton.md)
-  - Bridge
-  - Decorator
-  - Facade
-  - Flyweight
+  - Prototype
 
 - Structural
   - [Adapter](design-patterns/adapter.md)
+  - Bridge
   - [Composite](design-patterns/composite.md)
-  - Chain of responsibility
+  - Decorator
+  - Facade
+  - Flyweight
+  - [Proxy](design-patterns/proxy.md)
+
+- Behawioralne
+  - Chain of Responsibility
   - Command
   - Iterator
   - Mediator
   - [Memento](design-patterns/memento.md)
-  - [Proxy](design-patterns/proxy.md)
   - Observer
   - State
   - Strategy
   - Template Method
   - Visitor
+
