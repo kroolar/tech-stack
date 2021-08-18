@@ -18,7 +18,7 @@ Wzorce projektowe są typowymi rozwiązaniami problemów, które często występ
 - Kreacyjne
   - [Abstract Factory](design-patterns/abstract-factory.md)
   - [Builder](design-patterns/builder.md)
-  - Factory Method
+  - [Factory Method](design-patterns/factory-method.md)
   - [Prototype](design-patterns/prototype.md)
   - [Singleton](design-patterns/singleton.md)
 
