@@ -20,7 +20,7 @@ Wzorce projektowe są typowymi rozwiązaniami problemów, które często występ
   - [Builder](design-patterns/builder.md)
   - Factory Method
   - [Singleton](design-patterns/singleton.md)
-  - Prototype
+  - [Prototype](design-patterns/prototype.md)
 
 - Structural
   - [Adapter](design-patterns/adapter.md)
