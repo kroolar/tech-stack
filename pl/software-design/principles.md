@@ -2,7 +2,8 @@
 
 ### SOLID
 
-#### SRP - Single Responsible Principle
+- **SRP**(Single Responsible Principle)
+- Klasa powinna mieć tylko jeden powód do zmian
 
 #### OCP - Open/Close Principle
 
