@@ -1,9 +1,9 @@
 ### Ruby
 ### Rails
 ### OOP
-- [Overview]()
-- [Principles]()
+- [Overview](software-design/overview.mds)
+- [Principles](software-design/principles.md)
 - [Design Patterns](software-design/design-patterns.md)
-- [Software Architectures]()
+- [Architectures](software-design/architectures.md)
 ### DevOps
 ### Linux
