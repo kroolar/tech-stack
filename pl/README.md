@@ -1,5 +1,5 @@
 ### Ruby
-- [Ruby](ruby/version_3_overview.md)
+- [Version 3 Overview](ruby/version_3_overview.md)
 
 ### Rails
 ### OOP
