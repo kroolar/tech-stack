@@ -1,70 +1,50 @@
 # Method Lookup Chain
+Method Lookup Chain is a process that is responsible for finding the appropriate method that we want to run:
 
-Method Lookup Chain jest procesem, który odpowiada za znalezienie odpowiedniej metody, którą chcemy uruchomić.
+1. [NoMethodError](#noMethodError)
+2. [Method Missing](#methodMissing)
+3. [Object, Kernel, BasicObject](#basicObject)
+4. [Parent Class](#parentClass)
+5. [Include Modules](#includeModules)
+6. [Instance Methods](#instanceMethods)
+7. [Prepend Modules](#prependModules)
+8. [Singleton Methods](#singletonMethods)
 
-1. Singleton methods
-2. Prepend modules
-3. Instance methods
-4. Include modules
-5. Parent class
-6. Object, Kernel and BasicObject
-7. Method missing
-8. Super
-9. Extend
+- [Super](#super)
+- [Class Methods](#classMethods)
+- [Extend](#extendModules)
 
-
-1. Instance methods
-Metody instancji to pierwsze miejsce, gdzie Ruby szuka metody. Czym jest metoda instancji> Jest to metoda, która została utworzona tylko i wyłącznie dla jednego obiektu/instancji danej klasy.
+### <a name="noMethodError">1. NoMethodError</a>
+If we call a method that is not defined then _NoMethodError_ will be returned.
 
 ``` Ruby
 class Dog
 end
 
 dog = Dog.new
-dog.me # => NoMethodError
-  
-def dog.me
-  'asd'
-end
+dog.me # => NoMethodError: undefined method `me' for #<Dog:0x000055cf33cc59b8>
 ```
 
-2. Prepend modules
-Ruby nie wspiera wielokrotnego dziedziczenia ale umożliwa to za pomocą modułów. Popularnie zwanych jako mixiny. Za pomocą metody prepend możemy dołączać moduły do klas i korzystać z nich tak jakby były wbudowane.
+### <a name="methodMissing">2. Method Missing</a>
+Before _NoMethodError_ is raised, _method_missing_ is run. This method is run whenever Ruby cannot find another method, and is used in meta-programming.
 
-3. Instance methods
-Jeśli nie stworzyliśmy żadnych metod instancji oraz nie dołączyliśmy żadnych modułów to zostanie uruchomiona metoda, która została zdefiniowana w klasie. Najczęściej metody są uruchamiane właśnie z tego miejsca.
-
-4. Include methods
-  Za pomocą include możemy dołączać moduły tak samo jak w przypadku prepend. Jedyną róznicą jest to, że zostaą wyszukane dopiero wtedy kiedy metoda o takiej samej nazwie nie została zdefiowana w jako metoda instancji
-  
-7. Parent class methods
-  Jeśli Ruby nie natrafił na daną metode do tego czasu będzie sprawdzał czy metoda z której dziedziczy dana klasa nie posiada takiej klasy. Jeśli nie to będzie szedł w góre i sprawdzała czy rodzic metoda z której dziedziczy nie ma takiej metody i tak dalej i tak ddalej.
- 
-9. Object, Kernel, BasicObject
-  A co jeśli klasa nie dziedziczy z żadnej klasy? Tak naprawdę nawet klasa, która jawnie nie dziedziczy z żadnej klasy dziedziczy z klasy Object.
-  Natomiast klasa object dzidziczyz klasy BasicObject.
-  Między nimi znajduję się jeszcze moduł kernel
- 
-11. Method Missing
-  Jeśli żaden moduł ani klasy po drodze nie trafi na daną metoda to zostanie uruchomiona metoda missing_method najpierw w głównej kklasie. Metoda ta służy najczęściej do metaprogramowania ale może być użyta w dowolnym celu. Jest to zwykła metoda, która zostaje uruchomiona w momencie kiedy nie można uruchomić metody.
-  Jeśli method missing nie zostanie zdefiniowana w klasie to interpreter będzie jej szukał w klasie nadrzędnej, aż dojdzie do samej góry/
-  
-13. NoMethodError
-  Jełśi nic nie znajdzie zostanie uruchomiony NoMethodError
-
-
-
-10. NoMethodError
-Co jeśli dany obiekt ani, żadna klasa nadrzędna nie posaida, żadnej metody. Wtedy to zostanie zwrócony NoMethodError.
-
-2. Method missing
-Jeśli Ruby nie znajdzie, żadnej metody będzie wywoływał method_missing najpierw w tej samej klasie, a jeśli tam jej nie znajdzie to w każdej następnej. Metoda ta najczęściej jest używana w przypadku metaprogramowania.
-
-4. Object, Kernel and BasicObject
+``` Ruby
+class Dog
+  def method_missing(method)
+    'Method not found'
+  end
+end
 
 dog = Dog.new
-
-dog.equal? 'as' => false
+dog.me # => "Method not found"
+```
+<!-- 
+### <a name="basicObject">3. Object, Kernel, BasicObject</a>
+Następnym miejscem w którym szuka Ruby jest klasa nadrzędna. Tak naprawdę nawet klasa, która jawnie nie dziedziczy z żadnej klasy dziedziczy z klasy Object.
+  Natomiast klasa object dzidziczyz klasy BasicObject.
+  Między nimi znajduję się jeszcze moduł kernel
+  
+  dog.equal? 'as' => false
 Jakim cudem to działa?
 
 Ponieważ
@@ -82,13 +62,15 @@ Dog.ancestors => [Dog, Object, Kernel, BasicObject]
 Jak to możliwe? Ponieważ Kernel nie jest klasą tylko modułem możemy to sprawdzić
 
 Dog.ancestors.map { |d| "#{e.class}: #{e}" } => ["Class: Dog", "Class: Object", "Module: Kernel", "Class: BasicObject"]
+-->
+  
+### <a name="parentClass">4. Parent Class</a>
+If Ruby did not find a method in a given class, it will check whether any of the parent classes from which the class inherits does not have a method with the given name.
 
-W jeżyku Ruby występuje tylko pojedyncze dziedziczenie ale dzięki modułom możemy zmieniać zachowanie klas tak jakbyśmy mieli wielokrotne dziedziczenie.
-
-3. Parent class
+``` Ruby
 class Animal
   def me
-    ;asd
+    'Run in Parent Class'
   end
 end
 
@@ -96,61 +78,73 @@ class Dog < Animal
 end
 
 dog = Dog.new
-
-dog.me
-
-Jeśli klasa nie ma metody będzie jej szukał w metodzie rodziców.
-
-
-5. Singleton methods
-
-Method Lookup jako pierwsze szuka w singleton methods.
-Singleton method jest metodą, która została utworzona tylko dla konkretnej instancji.
-
-``` Ruby
-class Dog
-  def me
-    puts 'I am a Human'
-  end
-end
-
-artur = Human.new
-bartek = Human.new
-
-def artur.me
-  puts "I'm Artur"
-end
-
-artur.me
-bartek.me
+dog.me # => "Method from parent class"
 ```
 
-2. Prepend modules
+### <a name="includeModules">5. Include Modules</a>
+W jeżyku Ruby występuje tylko pojedyncze dziedziczenie ale dzięki modułom możemy zmieniać zachowanie klas tak jakby wielokrotne dziedziczenie było możliwe.
+Za pomocą include możemy dołączać moduły tak samo jak w przypadku prepend. Jedyną róznicą jest to, że zostaą wyszukane dopiero wtedy kiedy metoda o takiej samej nazwie nie została zdefiowana w jako metoda instancji
+
 ``` Ruby
-module Something
+module Able
   def me
-    'I am a new module'
+    'Able module'
   end
 end
 
 class Dog
-  prepend Something
+  include Able
+end
+
+dog = Dog.new
+dog.me # => 'Method from Observable module'
+```
+
+### <a name="instanceMethods">6. Instance Methods</a>
+Jeśli nie stworzyliśmy żadnych metod instancji oraz nie dołączyliśmy żadnych modułów to zostanie uruchomiona metoda, która została zdefiniowana w klasie. Najczęściej metody są uruchamiane właśnie z tego miejsca.
+``` Ruby
+class Dog
+  def me
+  end
+end
+
+dog = Dog.new
+dog.me # => 'Instance Method'
+```
+
+### <a name="prependModules">7. Prepend Modules</a>
+Ruby nie wspiera wielokrotnego dziedziczenia ale umożliwa to za pomocą modułów. Popularnie zwanych jako mixiny. Za pomocą metody prepend możemy dołączać moduły do klas i korzystać z nich tak jakby były wbudowane.
+
+``` Ruby
+module Able
+  def me
+    'Able module'
+  end
+end
+
+class Dog
+  prepend Able
+end
+
+dog = Dog.new
+dog.me # => 'Bark from Other module'
+```
+
+### <a name="singletonMethods">8. Singleton Methods</a>
+Metody instancji to pierwsze miejsce, gdzie Ruby szuka danej metody. Czym jest metoda instancji? Jest to metoda, która została utworzona tylko i wyłącznie dla jendej instancji danej klasy.
+
+``` Ruby
+class Dog
+end
+
+dog = Dog.new
+dog.me # => NoMethodError
   
-  def me
-    I am
-  end
+def dog.me
+  'Singleton Methods'
 end
 ```
 
-3. Metody zdefiniowane w klasie
-4. Include modules
-5. Parents classes and modules -> Object -> Kernel -> BasicObject 
-6. Method missing
-7. NoMethodError
-
-
-9. Extend module
-10. Method in class
-11. Included modulesuby
-
-
+### <a name="super">Super</a>
+### <a name="extendModules">Extend Modules</a>
+### <a name="classMethods">Class Methods</a>
