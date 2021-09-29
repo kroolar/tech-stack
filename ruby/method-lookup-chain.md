@@ -1,150 +1,235 @@
 # Method Lookup Chain
-Method Lookup Chain is a process that is responsible for finding the appropriate method that we want to run:
+Method Lookup Chain is a process that is responsible for finding the appropriate method that we want to run.
 
 1. [NoMethodError](#noMethodError)
 2. [Method Missing](#methodMissing)
-3. [Object, Kernel, BasicObject](#basicObject)
+3. [Object, BasicObject](#basicObject)
 4. [Parent Class](#parentClass)
 5. [Include Modules](#includeModules)
 6. [Instance Methods](#instanceMethods)
 7. [Prepend Modules](#prependModules)
 8. [Singleton Methods](#singletonMethods)
-
-- [Super](#super)
-- [Class Methods](#classMethods)
-- [Extend](#extendModules)
+9. [Extend Modules](#extendModules)
 
 ### <a name="noMethodError">1. NoMethodError</a>
-If we call a method that is not defined then _NoMethodError_ will be returned.
+If we call a method that is not defined then **NoMethodError** will be returned.
 
 ``` Ruby
-class Dog
-end
+class Human; end
 
-dog = Dog.new
-dog.me # => NoMethodError: undefined method `me' for #<Dog:0x000055cf33cc59b8>
+john = Human.new
+john.hello # => NoMethodError: undefined method `hello' for #<Human:0x000055cf33cc59b8>
 ```
+<br>
 
 ### <a name="methodMissing">2. Method Missing</a>
-Before _NoMethodError_ is raised, _method_missing_ is run. This method is run whenever Ruby cannot find another method, and is used in meta-programming.
+Before **NoMethodError** is raised, **method_missing** is run. This method is run whenever Ruby cannot find a matching method. This method is most often used in metaprogramming.
 
 ``` Ruby
-class Dog
+class Human
   def method_missing(method)
-    'Method not found'
+    "Method 'method' not found"
   end
 end
 
-dog = Dog.new
-dog.me # => "Method not found"
+john = Human.new
+john.hello # => "Method 'hello' not found"
 ```
-<!-- 
-### <a name="basicObject">3. Object, Kernel, BasicObject</a>
-Następnym miejscem w którym szuka Ruby jest klasa nadrzędna. Tak naprawdę nawet klasa, która jawnie nie dziedziczy z żadnej klasy dziedziczy z klasy Object.
-  Natomiast klasa object dzidziczyz klasy BasicObject.
-  Między nimi znajduję się jeszcze moduł kernel
-  
-  dog.equal? 'as' => false
-Jakim cudem to działa?
+<br>
 
-Ponieważ
-Każda klasa dziedziczy z klasy Object, która dziedziczy z BasicObject. Możemy to sprawdzić następująco.
-Dog.superclass
-Dog.superclass.superclass
-
-Jak widzimy dalej już nic nie ma
-Dog.superclass.superclass.superclass
-
-Jednak to nie są wszyscy rodzice z których dziedziczy Dog. Jeśli chcemy to sprawdzić musimy uruchomić metode ancestors.
-
-Dog.ancestors => [Dog, Object, Kernel, BasicObject]
-
-Jak to możliwe? Ponieważ Kernel nie jest klasą tylko modułem możemy to sprawdzić
-
-Dog.ancestors.map { |d| "#{e.class}: #{e}" } => ["Class: Dog", "Class: Object", "Module: Kernel", "Class: BasicObject"]
--->
-  
-### <a name="parentClass">4. Parent Class</a>
-If Ruby did not find a method in a given class, it will check whether any of the parent classes from which the class inherits does not have a method with the given name.
+### <a name="basicObject">3. Object, BasicObject</a>
+We want to check our object id. How is it possible if we haven't created such a method?
 
 ``` Ruby
-class Animal
-  def me
-    'Run in Parent Class'
+class Human; end
+
+john = Human.new
+john.object_id # => 47319130769440
+```
+<br>
+
+Ruby looks for the parent class and all parent classes next. But in case a class does not explicitly inherit from another class, it inherits from **Object** and therefore we can use the **object_id** method.
+
+``` Ruby
+Human.superclass # => Object
+```
+<br>
+
+The **Object** class inherits from **BasicObject**, which is the parent of all classes in Ruby.
+
+``` Ruby
+Human.superclass.superclass # => BasicObject
+Human.superclass.superclass.superclass # => nil
+```
+<br>
+
+### <a name="parentClass">4. Parent Class</a>
+Before looking for a method in the **Object** and **BasicObject** classes, Ruby looks for a method in the all explicitly defined parent classes.
+
+``` Ruby
+class Mammal
+  def hello
+    'Hello from parent class'
   end
 end
 
-class Dog < Animal
-end
+class Human < Mammal; end
 
-dog = Dog.new
-dog.me # => "Method from parent class"
+john = Human.new
+john.hello # => "Hello from parent class"
 ```
+<br>
 
 ### <a name="includeModules">5. Include Modules</a>
-W jeżyku Ruby występuje tylko pojedyncze dziedziczenie ale dzięki modułom możemy zmieniać zachowanie klas tak jakby wielokrotne dziedziczenie było możliwe.
-Za pomocą include możemy dołączać moduły tak samo jak w przypadku prepend. Jedyną róznicą jest to, że zostaą wyszukane dopiero wtedy kiedy metoda o takiej samej nazwie nie została zdefiowana w jako metoda instancji
+In Ruby, there is only a single inheritance, but thanks to modules, we can change the behavior of classes as if multiple inheritance was possible.
+
+With **include**, we can include modules in a given class. Thanks to this, we have access to all methods defined in the module.
 
 ``` Ruby
-module Able
-  def me
-    'Able module'
+module Talkable
+  def hello
+    'Hello from Talkable module'
   end
 end
 
-class Dog
-  include Able
+class Human < Mammal
+  include Talkable
 end
 
-dog = Dog.new
-dog.me # => 'Method from Observable module'
+john = Human.new
+john.hello # => Hello from Talkable module
 ```
+<br>
+
+Coming back to the **Object** class, it is worth mentioning that the **Kernel** module is also included to the **Object** class. We didn't see this when checking the parent classes, but we can check it with the **ancestors** method.
+
+``` Ruby
+Object.ancestors => [Object, Kernel, BasicObject]
+```
+<br>
 
 ### <a name="instanceMethods">6. Instance Methods</a>
-Jeśli nie stworzyliśmy żadnych metod instancji oraz nie dołączyliśmy żadnych modułów to zostanie uruchomiona metoda, która została zdefiniowana w klasie. Najczęściej metody są uruchamiane właśnie z tego miejsca.
+The most commonly used methods are **instance methods**. These are the usual methods that are defined in the class.
+
 ``` Ruby
-class Dog
-  def me
+module Talkable
+  def hello
+    'Hello from Talkable module'
   end
 end
 
-dog = Dog.new
-dog.me # => 'Instance Method'
+class Human < Mammal
+  include Talkable
+
+  def hello
+    'Hello from instance method'
+  end
+end
+
+john = Human.new
+john.hello # => 'Hello from instance method'
 ```
+<br>
 
 ### <a name="prependModules">7. Prepend Modules</a>
-Ruby nie wspiera wielokrotnego dziedziczenia ale umożliwa to za pomocą modułów. Popularnie zwanych jako mixiny. Za pomocą metody prepend możemy dołączać moduły do klas i korzystać z nich tak jakby były wbudowane.
+**Prepend** allows modules to be included in a class similar to **include**, except that the methods defined in this module will take precedence over the **instance methods**.
 
 ``` Ruby
-module Able
-  def me
-    'Able module'
+module Talkable
+  def hello
+    'Hello from Talkable module'
   end
 end
 
-class Dog
-  prepend Able
+class Human < Mammal
+  prepend Talkable
+  
+  def hello
+    'Hello from instance method'
+  end
 end
 
-dog = Dog.new
-dog.me # => 'Bark from Other module'
+john = Human.new
+john.hello # => 'Hello from Talkable module'
 ```
+<br>
 
 ### <a name="singletonMethods">8. Singleton Methods</a>
-Metody instancji to pierwsze miejsce, gdzie Ruby szuka danej metody. Czym jest metoda instancji? Jest to metoda, która została utworzona tylko i wyłącznie dla jendej instancji danej klasy.
+A **singleton method** is one that has been defined only for a specific instance. This method is rarely used and takes precedence over all and other methods.
 
 ``` Ruby
-class Dog
+module Talkable
+  def hello
+    'Hello from Talkable module'
+  end
 end
 
-dog = Dog.new
-dog.me # => NoMethodError
+class Human < Mammal
+  prepend Talkable
+
+  def hello
+    'Hello from instance method'
+  end
+end
+
+john = Human.new
+john.hello # => 'Hello from Talkable method'
   
-def dog.me
-  'Singleton Methods'
+def john.hello
+  'Hello from singleton method'
 end
-```
 
-### <a name="super">Super</a>
-### <a name="extendModules">Extend Modules</a>
-### <a name="classMethods">Class Methods</a>
+john.hello # => 'Hello from singleton method'
+```
+<br>
+
+### <a name="extendModules">9. Extend Modules</a>
+In Ruby, we can also create class methods.
+
+``` Ruby
+class Human
+  def self.hello
+    'Hello from class method'
+  end
+end
+
+Human.hello # => 'Hello from class method'
+```
+<br>
+
+In the case of class methods, we can also attach modules to them using **extend**.
+
+``` Ruby
+module Talkable
+  def hello
+    'Hello from extended module'
+  end
+end
+
+class Human
+  extend Talkable
+end
+
+Human.hello # => 'Hello from extended module'
+```
+<br>
+
+**Extend** is similar to include. Therefore, the methods of the class are checked first, and then the methods in the module. Ruby has no equivalent for prepend when it comes to class methods.
+
+``` Ruby
+module Talkable
+  def hello
+    'Hello from extended module'
+  end
+end
+
+class Human
+  extend Talkable
+  
+  def self.hello
+    'Hello from class method'
+  end
+end
+
+Human.hello # => 'Hello from class method'
+```
