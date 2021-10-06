@@ -2,9 +2,11 @@
 Ruby implementaions MRI YARV jruby
 1. [Ruby Language](#rubyLanguage)
 2. [YARV](#yarv)
+3. [Garbage Collector](#gc)
+4. [concurenncy and pallarelis and comparision to ruby 3.0]
 
+ZALETY I WADY METAPROGRAMOWANIA
 
-3. [YARV](#yarv)
 4. [Interpreter](#interpreter)
 5. [Interprete]
 6. How Ruby Interprets code
