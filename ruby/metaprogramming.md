@@ -9,6 +9,7 @@
 7. [Hierarchy](#hierarchy)
 8. [Instance Eval](#instanceEval)
 9. [Define Method](#defineMethod)
+10. [Pros & Cons](#prosAndCons)
 
 
 ### <a name="overview">1. Overview</a>
@@ -232,4 +233,10 @@ u = User.new
 u.hello # => 'New method created!'
 u.hello # => 'Hello World!'
 ```
+<br>
+
+### <a name="prosAndCons">10. Pros & Cons</a>
+The biggest advantage of metaprogramming is the creation of very flexible code that can adapt to various changes by itself and allows you to prevent code repetition.
+
+The biggest disadvantage of metaprogramming, however, is that it creates code that can be difficult to read, understand, and debug. Metaprogramming can also increase code compile time because the code is _created_ during compilation.
 
