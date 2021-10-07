@@ -7,18 +7,6 @@ Ruby implementaions MRI YARV jruby
 
 ZALETY I WADY METAPROGRAMOWANIA
 
-4. [Interpreter](#interpreter)
-5. [Interprete]
-6. How Ruby Interprets code
-  1. Code
-  2. Tokenize
-  3. AST
-  4. Execute 
-7. [Tokenizing](#tokenizing)
-8. [Lexing](#lexing)
-9. [Parsing](#parsing)
-10. Garbage Collector
-
 ### <a name="rubyLanguage">1. Ruby Language</a>
 Ruby was invented by Yukihiro _"Matz"_ Matsumoto in 1993, and the original, standard version of Ruby is often known as Matz’s Ruby Interpreter (MRI) sometimes also called CRuby.
 
@@ -38,23 +26,24 @@ Over the years many alternative implementations of Ruby have been written:
 * [erruby](https://github.com/johnlinvc/erruby) - ruby on erlang.
 
 ### <a name="yarv">2. YARV</a>
-YARV(Yet another Ruby VM) is a bytecode interpreter writted in C that was developed for Ruby language.
+**YARV**(Yet another Ruby VM) is a bytecode interpreter writted in **C** that was developed for Ruby language.
 
-Dla przykładu mamy poniższy kod.
+We will use the following code in all examples.
+
 ``` Ruby
-3.times { |n| puts n }
+x = 2 + 3
 ```
 
-Po uruchomieniu dostajemy poniższy rezultat.
-``` Ruby
-0
-1
-2
+After running this code, we will get the following result.
+
+```
+ruby code.rb
+=> 5
 ```
 
-Pytanie brzmi co się dziej pomiędzy wywołaniem kodu, a tym co dostajemy w odpowiedzi.
+The question is what happens between calling the code and what we get in response.
 
-Zanim nasz kod zostanie uruchomiony musi przejść przez kilka procesów. W rzeczywistości nasz kod musi zostać przeczytam 3 razy zanim zostanie uruchomiony. Tak wygląda cały proces.
+Before our code is run, it has to go through several processes. In fact, our code needs to be read 3 times before it is run. This is the whole process.
 
 ```
 ###############    ######################    ######################    #############    #######################
@@ -62,134 +51,73 @@ Zanim nasz kod zostanie uruchomiony musi przejść przez kilka procesów. W rzec
 ###############    ######################    ######################    #############    #######################
 ```
 
-Tokenizing
-Pierwszą rzeczy jaką robi interpreter jest tokenizowanie go. Oznacza to, że dzieli go na mniejsze kawałki, które mogą mieć jakiś sens. Dzięki modułowi Ripper dostępnemu w bibliotece standardowej możemy zobaczyć jak interpreter odczytuje nasz kod.
+#### Tokenizing
+The first thing the interpreter does is tokenize it. Ruby reads all the code first, and then tokenizes it. Tokenization means that it converts the code into a series of tokens, i.e. words that may make sense.
+
+Thanks to the Ripper module available in the standard library, we can see how the interpreter reads our code.
 
 ``` Ruby
-require 'ripper'
-
-code = "3.times { |n| puts n }"
-
-Ripper.tokenize(code) # => ["3", ".", "times", " ", "{", " ", "|", "n", "|", " ", "puts", " ", "n", " ", "}"] 
+Ripper.tokenize(code) # => ["x", " ", "=", " ", "2", " ", "+", " ", "3"]
 ```
 
-W tym momencie Ruby jeszcze nie sprawdza czy to co wpisaliśmy ma jakikolwiek sens.
-
-
-### <a name="#">3. Lexing</a>
-### <a name="parsing">4. Parsing</a>
-Ruby zmienia tezt na coś co się nazywa abstract syntaxt tree (AST) Co to jest?
-
-### <a name="parsing">5. Compiling</a>
-Cpmpiling into bytecode
-
-Ruby kompiluje AST na kod bitowy niższego rzędu, który nastęþnie jest uruchamiany przez maszyne wirtualną Rubiego
-
-Możemy zajrzeć do wnętrze masyny wirtualnej za pomocą
-``` Ruby
-RubyVM::InstructionSequence.compile('').disassemble
-
-Następnie maszyna wirtualna (YARV) step trough these instructions executes them
-```
-
-2. Tokenization and parsing
-3. Compilation
-4. How ruby executes code
-
-
-### Tokenization
-
-Na początku Ruby czyta kod i zamienia go na tokeny
+After tokenizing everything, that's the end of the first code check. It started out as a text and is now a series of tokens. We can read more information about tokens with **lex** method.
 
 ``` Ruby
-3.times { |n| puts n } 
-```
-
-ruby test.rb # =>
-
-Najpierw czyta całość, a potem to tokenizuje
-``` Ruby
- \/
-| 3 | . | t | i | m | e | s |
-```
-
-Tokenizuje to znaczy, że zamienia je na na serie tokenów czyli słów które rozumie
-Widzi, że to jest jedynka i leci dalej
-
-
-``` Ruby
-     \/
-| 3 | . | t | i | m | e | s |
-```
-
-
-Potem znajduje kropke i leci dalej bo może do być floating number
-
-``` Ruby
-          \/
-| 3 | . | t | i | m | e | s |
-```
-
-W tym momencie RUby przerywa iteracje ponieważ orientuje się, że kropka jest częśćią oddzielnego tokena i wraca do tyłu oraz konwertuje liczbę na token tINTEGER
-
-
-``` Ruby
-              \/
-tINTEGER(10) | . | t | i | m | e | s |
-```
-
-``` Ruby
-                    \/
-[tINTEGER(10)] [.] | t | i | m | e | s |
-```
-``` Ruby
-                    \/
-[tINTEGER(10)] [.] [tIDENTIFIER(times)]
-```
-Po tym jak ztokenizuje wszystko koćzy się Na tym kończy się pierwsze sprawdzenie kodu. Zaczęło się jakko tekst a teraz jest serią tokenów
-
-Ripper
-Jeśli chcemy sprawdzić jak działa tokenizowanie możemy użyć narzędzia ripper z biblioteki standardowej
-
-``` Ruby
-require 'ripper'
-
-code = '3.times { |n| puts n }'
-
-Ripper.tokenize(code) => => ["3", ".", "times", " ", "{", " ", "|", "n", "|", " ", "puts", " ", "n", " ", "}"] 
-pp Ripper.lex(code) => 
-
 [
- [[1, 0], :on_int, "3", EXPR_END],
- [[1, 1], :on_period, ".", EXPR_DOT],
- [[1, 2], :on_ident, "times", EXPR_ARG],
- [[1, 7], :on_sp, " ", EXPR_ARG],
- [[1, 8], :on_lbrace, "{", EXPR_BEG],
- [[1, 9], :on_sp, " ", EXPR_BEG],
- [[1, 10], :on_op, "|", EXPR_BEG|EXPR_LABEL],
- [[1, 11], :on_ident, "n", EXPR_ARG],
- [[1, 12], :on_op, "|", EXPR_BEG|EXPR_LABEL],
- [[1, 13], :on_sp, " ", EXPR_BEG|EXPR_LABEL],
- [[1, 14], :on_ident, "puts", EXPR_CMDARG],
- [[1, 18], :on_sp, " ", EXPR_CMDARG],
- [[1, 19], :on_ident, "n", EXPR_END|EXPR_LABEL],
- [[1, 20], :on_sp, " ", EXPR_END|EXPR_LABEL],
- [[1, 21], :on_rbrace, "}", EXPR_END]
+ [[1, 0], :on_ident, "x", EXPR_CMDARG],
+ [[1, 1], :on_sp, " ", EXPR_CMDARG],
+ [[1, 2], :on_op, "=", EXPR_BEG],
+ [[1, 3], :on_sp, " ", EXPR_BEG],
+ [[1, 4], :on_int, "2", EXPR_END],
+ [[1, 5], :on_sp, " ", EXPR_END],
+ [[1, 6], :on_op, "+", EXPR_BEG],
+ [[1, 7], :on_sp, " ", EXPR_BEG],
+ [[1, 8], :on_int, "3", EXPR_END]
 ]
 ```
 
-Każda linia odnośi się do jednego tokena. Po lewej mamy numer lini, token jako symbol, następnie token a dalej text odnoszący się do tokena
+As we can see here, we have lines, a symbol specifying the type of the token, its textual representation, and where it ends and begins.
 
-Jak Ruby rozumie kod?
-Ruby zamienia kod na serie tokenów ale jak jak rozumie kod i go uruchamia? Następną drogą jest parsowanie gdzie słowa są grupowane w sentencje i frazy które mają sens dla Rubiego. Uzywa do tego parser generator. Ruby używa do tego Bison dostajemy file z końcówką .y parse.y, która określa reguły gramatyczne a następnie 
+At this point, Ruby doesn't yet check to see if what we typed makes any sense.
 
-W momencie tokenizowanie może być niepoprawny kod
+#### Parsing
+Now that we have the tokenized code, it's time to parse. When Ruby parses, it changes the text to something called an Abstract Syntax Tree (AST) which is a representation of your code.
 
-Parsing
-Jak już mamy podzielony kod zmienia to na text na coś co się nazywa AST(abstract syntax tree) i po tym may jeszcze jeden krok
-Ripper.sexp
+``` Ruby
+pp Ripper.sexp(code) # =>
 
-Compile
+[:program,
+ [[:assign,
+   [:var_field, [:@ident, "x", [1, 0]]],
+   [:binary, [:@int, "2", [1, 4]], :+, [:@int, "3", [1, 8]]]]]]
+```
 
-Czyli zmiana kodu na kod niższego rzędy
+Ruby uses a tool called **Bison** for parsing. After parsing, we get a file with the extension **.Y**, which will later be converted into a file understandable for the **C** language.
 
+At this point, Ruby already knows how to run your program.
+
+#### Compiling
+In the next step, Ruby compiles the **AST** to a low-order bytecode. We can see what it looks like using the **RubyVM :: InstructionSequence** module.
+
+``` Ruby
+puts RubyVM::InstructionSequence.compile(code).disassemble
+
+== disasm: #<ISeq:<compiled>@<compiled>:1 (1,0)-(1,9)> (catch: FALSE)
+local table (size: 1, argc: 0 [opts: 0, rest: -1, post: 0, block: -1, kw: -1@-1, kwrest: -1])
+[ 1] x@0
+0000 putobject                    2                                   (   1)[Li]
+0002 putobject                    3
+0004 opt_plus                     <callinfo!mid:+, argc:1, ARGS_SIMPLE>, <callcache>
+0007 dup
+0008 setlocal_WC_0                x@0
+0010 leave
+```
+The code compiled in this way will then be executed step by step by the Ruby Virtual Machine.
+
+### <a name="gc">3. Garbage Collector</a>
+Garbbage Collector jest proces stosowany w językach wysokiego poziomu, który służy do zarządzania pamięcią. Klasyczna wersja Rubiego(MRI) używa GC, który został wynaleziony w roku 1960 o nazwie mark-and-sweep garbage collection
+
+Garbage Collector rozwiązuje 3 problemy:
+- allocate memory for use by new objects
+- identify which objects your program is no longer using
+- reclaim memory from unused objects
