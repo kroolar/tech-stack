@@ -3,7 +3,7 @@ Ruby implementaions MRI YARV jruby
 1. [Ruby Language](#rubyLanguage)
 2. [YARV](#yarv)
 3. [Garbage Collector](#gc)
-4. [concurenncy and pallarelis and comparision to ruby 3.0]
+4. [Concurenncy & Pallarelis](#cp)
 
 ZALETY I WADY METAPROGRAMOWANIA
 
@@ -115,9 +115,162 @@ local table (size: 1, argc: 0 [opts: 0, rest: -1, post: 0, block: -1, kw: -1@-1,
 The code compiled in this way will then be executed step by step by the Ruby Virtual Machine.
 
 ### <a name="gc">3. Garbage Collector</a>
-Garbbage Collector jest proces stosowany w językach wysokiego poziomu, który służy do zarządzania pamięcią. Klasyczna wersja Rubiego(MRI) używa GC, który został wynaleziony w roku 1960 o nazwie mark-and-sweep garbage collection
+**Garbage Collector** is a process used in high-level languages to manage memory. The classic version of Ruby (MRI) uses a **GC** called **mark-and-sweep** which was invented in 1960. 
 
-Garbage Collector rozwiązuje 3 problemy:
+Garbage Collector solves 3 problems:
 - allocate memory for use by new objects
 - identify which objects your program is no longer using
 - reclaim memory from unused objects
+
+#### Mark and Sweep Algorithm
+Ruby uses tricolor mark. Divides the objects into 3 categories of white, gray and black flag.
+
+First, Ruby checks all objects and white flags those that should not be removed, and gray flags those that might have some references to the objects in use. The next phase checks gray flag and their connections to other objects. If it should not be removed, the black flag will be mark, and if the object has no active references, it turns the flag white. This is how the first phase ends.
+
+The next and final phase is the sweep phase, which removes all objects that have been marked with a white flag.
+
+### <a name="cp">4. Concurrency & Parallellism</a>
+Concurrency - Robienie zadań w jednym czasie poprzez szybką zmiane pomiędzy nimi tak, że może się wydawać, że są wykonywane jednocześnie.
+
+Parallelism - Robienie wielu zadań w tym samym czasie równocześnie
+
+Concurrency jest najczęściej wykorzystywane w programach takich jak aplikacje webowe gdzie mamy wiele różnych wątków np. oczekwiane na pobranie danych lub czekanie na utworenie połączenia. Wirtualna maszyna pozwala na zmiane uruchomienie jednego wątku wtedy kiedy inny czeka
+
+Concurrency jest wykorzystywane dzięki Threads. Każdy program może mieć wiele wątków oraz musi mieć co najmniej jeden wątek, który jest wątkiem głównym.
+
+Możemy utworzyć nowy wątek za pomocą klasy Thread z biblioteki standardowej
+
+``` Ruby
+Thread.new do
+  loop{ puts 'First Thread'}
+end
+
+Thread.new do
+  loop { puts 'Second Thread'}
+end
+```
+
+Po uruchomieniu tego programu nie dostaniemy nic ponieważ wszystkie wątki kończą swoje działanie w momencie zakończenia głównego wątku. Dlatego opóźnimy go o sekunde
+
+``` Ruby
+Thread.new do
+  loop{ puts 'First Thread'}
+end
+
+Thread.new do
+  loop { puts 'Second Thread'}
+end
+
+sleep 1
+```
+
+W odpowiedzi dostaniemy bardzo długą liste stringów. Tutaj jest tylko jej mały wycinek
+
+```
+Second Thread
+Second Thread
+Second Thread
+Second Thread
+Second Thread
+Second Thread
+Second Thread
+First Thread
+First Thread
+Second Thread
+Second Thread
+Second Thr
+```
+
+To co możemy zauwazyć to to, że czas przyporządkownia jednego watku nie jest równomierny. Po drugie jak możemy zauważyć na końcu Ostani wątek nie zdołał się wykonać do końca
+
+Wątki w Rubym są normalnymi obiektami klasy Thread dlatego możemy je przypisać do zmiennych
+
+``` Ruby
+first_thread = Thread.new do
+  loop{ puts 'First Thread'}
+end
+
+second_thread = Thread.new do
+  loop { puts 'Second Thread'}
+end
+```
+
+Zamiast używać metody sleep możemy dołączyć wątki do głównego wątku za pomocą metody join.
+
+``` Ruby
+first_thread.join
+second_thread.join
+```
+
+W tym przypadku program będzie działał dopóki go nie zabijemy.
+
+Dla przykładu sprawdzimy ile czasu zajmie połączenie z kilkoma stronami w jednym wątku.
+
+``` Ruby
+require 'open-uri'
+
+websites = [
+  "https://google.com",
+  "https://facebook.com",
+  "https://github.com",
+  "https://stackoverflow.com",
+  "https://google.com",
+  "https://facebook.com",
+  "https://github.com",
+  "https://stackoverflow.com"
+]
+
+start_time = Time.now
+
+websites.each do |url|
+  open(url)
+end
+
+puts (((Time.now - start_time) % 3600) % 60)
+```
+
+4.434610808
+
+
+``` Ruby
+require 'open-uri'
+
+threads = []
+
+websites = [
+  "https://google.com",
+  "https://facebook.com",
+  "https://github.com",
+  "https://stackoverflow.com",
+  "https://google.com",
+  "https://facebook.com",
+  "https://github.com",
+  "https://stackoverflow.com"
+]
+
+start_time = Time.now
+
+websites.each do |url|
+  t = Thread.new do
+    open(url)
+  end
+
+  threads << t
+end
+
+threads.each { |t| t.join }
+
+puts (((Time.now - start_time) % 3600) % 60)
+```
+
+1.030195963
+
+Wątki w Ruby mapują sie wątki systemu operacyjnego
+
+Może istnieć wiele wątków, ale tylko jeden jest aktywny. W przypadku internetu nie jest to problem ponieważ kod w większości czeka na odpowiedzi z serwerów
+
+Wątki w Rubym nadają sie do prostych rzeczy ale nie powinno się ich stosować w przypadku jakiś kalkulacji
+Global Interpreter Lock zapobiega dwóm wątkom pracować jednocześnie więc jeden wątke będzie co jakiś czas przerywany, żeby drugi mógł pracować. Ma to na celu zapobieganie temu, że jeden wątek jest cały czas odpalony,
+Pozwala na większą konkurencyjność między wątkami tego samego procesu interpretera ale powoduje brak zwiększenia wydajności programu uruchomionego na komputerze wieloprocesorowym. Jednym z powodów takich ograniczeni jest język C w któ©ym jest naisany Ruby, a nie działa on dobrze w trybie wieloprocesorowym
+
+GIl nie jest stosowany w niektórych implementacjach Rubiego takich jak JRuby oraz Rubinus
