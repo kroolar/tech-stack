@@ -5,8 +5,6 @@ Ruby implementaions MRI YARV jruby
 3. [Garbage Collector](#gc)
 4. [Concurenncy & Pallarelis](#cp)
 
-ZALETY I WADY METAPROGRAMOWANIA
-
 ### <a name="rubyLanguage">1. Ruby Language</a>
 Ruby was invented by Yukihiro _"Matz"_ Matsumoto in 1993, and the original, standard version of Ruby is often known as Matz’s Ruby Interpreter (MRI) sometimes also called CRuby.
 
