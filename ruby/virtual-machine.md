@@ -130,15 +130,14 @@ First, Ruby checks all objects and white flags those that should not be removed,
 The next and final phase is the sweep phase, which removes all objects that have been marked with a white flag.
 
 ### <a name="cp">4. Concurrency & Parallellism</a>
-Concurrency - Robienie zadań w jednym czasie poprzez szybką zmiane pomiędzy nimi tak, że może się wydawać, że są wykonywane jednocześnie.
 
-Parallelism - Robienie wielu zadań w tym samym czasie równocześnie
+**Concurrency** - Doing tasks at one time by quickly switching between them so that it may appear as if they are being performed simultaneously.
 
-Concurrency jest najczęściej wykorzystywane w programach takich jak aplikacje webowe gdzie mamy wiele różnych wątków np. oczekwiane na pobranie danych lub czekanie na utworenie połączenia. Wirtualna maszyna pozwala na zmiane uruchomienie jednego wątku wtedy kiedy inny czeka
+**Parallelism** - Doing multiple tasks at the same time.
 
-Concurrency jest wykorzystywane dzięki Threads. Każdy program może mieć wiele wątków oraz musi mieć co najmniej jeden wątek, który jest wątkiem głównym.
+Concurrency is most often used in programs such as web applications where we have many different threads, e.g. waiting for data to be fetched from DB or waiting for a server response. A virtual machine allows you to change the run of one thread while another is waiting.
 
-Możemy utworzyć nowy wątek za pomocą klasy Thread z biblioteki standardowej
+We can create our own threads in Ruby using the **Thread** class from the standard library.
 
 ``` Ruby
 Thread.new do
@@ -150,7 +149,9 @@ Thread.new do
 end
 ```
 
-Po uruchomieniu tego programu nie dostaniemy nic ponieważ wszystkie wątki kończą swoje działanie w momencie zakończenia głównego wątku. Dlatego opóźnimy go o sekunde
+After running this program, we will get nothing because all threads are terminating when the main thread ends. Therefore, when the main thread has terminated or is absent, the threads will not start.
+
+We will delay the main thread for a second so our threads can start running.
 
 ``` Ruby
 Thread.new do
@@ -164,7 +165,7 @@ end
 sleep 1
 ```
 
-W odpowiedzi dostaniemy bardzo długą liste stringów. Tutaj jest tylko jej mały wycinek
+In response, we'll get a very long list of strings. Here, it only shows a small part of return.
 
 ```
 Second Thread
@@ -181,9 +182,9 @@ Second Thread
 Second Thr
 ```
 
-To co możemy zauwazyć to to, że czas przyporządkownia jednego watku nie jest równomierny. Po drugie jak możemy zauważyć na końcu Ostani wątek nie zdołał się wykonać do końca
+What we can see is that the thread execution time is not even.
 
-Wątki w Rubym są normalnymi obiektami klasy Thread dlatego możemy je przypisać do zmiennych
+Threads in Ruby are normal objects so we can assign them to variables. 
 
 ``` Ruby
 first_thread = Thread.new do
@@ -195,25 +196,21 @@ second_thread = Thread.new do
 end
 ```
 
-Zamiast używać metody sleep możemy dołączyć wątki do głównego wątku za pomocą metody join.
+Instead of using the sleep method, we can join threads to the main thread with the join method.
 
 ``` Ruby
 first_thread.join
 second_thread.join
 ```
 
-W tym przypadku program będzie działał dopóki go nie zabijemy.
+In this case, the program will run until we kill it.
 
-Dla przykładu sprawdzimy ile czasu zajmie połączenie z kilkoma stronami w jednym wątku.
+For example, we will check how long it will take to connect to several pages in one thread. 
 
 ``` Ruby
 require 'open-uri'
 
 websites = [
-  "https://google.com",
-  "https://facebook.com",
-  "https://github.com",
-  "https://stackoverflow.com",
   "https://google.com",
   "https://facebook.com",
   "https://github.com",
@@ -226,11 +223,10 @@ websites.each do |url|
   open(url)
 end
 
-puts (((Time.now - start_time) % 3600) % 60)
+puts (((Time.now - start_time) % 3600) % 60) # => 1.372596871
 ```
 
-4.434610808
-
+With the standard implementation, the time is over a second. Now let's try to run a separate thread for each connection.
 
 ``` Ruby
 require 'open-uri'
@@ -242,10 +238,6 @@ websites = [
   "https://facebook.com",
   "https://github.com",
   "https://stackoverflow.com",
-  "https://google.com",
-  "https://facebook.com",
-  "https://github.com",
-  "https://stackoverflow.com"
 ]
 
 start_time = Time.now
@@ -260,17 +252,63 @@ end
 
 threads.each { |t| t.join }
 
-puts (((Time.now - start_time) % 3600) % 60)
+puts (((Time.now - start_time) % 3600) % 60) # => 0.461594078
+
 ```
 
-1.030195963
+In this case, the connection time to the same sites is less than half a second. 
 
-Wątki w Ruby mapują sie wątki systemu operacyjnego
+However, it should be remembered that threads in Ruby map directly to threads of the opearating system, so creating too many threads at once does not necessarily speed up the whole process.
 
-Może istnieć wiele wątków, ale tylko jeden jest aktywny. W przypadku internetu nie jest to problem ponieważ kod w większości czeka na odpowiedzi z serwerów
+In summary, there can be many threads in Ruby, but only one can be active at a time. In the case of the wev development, this is not a problem because most of the code waits for responses from servers.
 
-Wątki w Rubym nadają sie do prostych rzeczy ale nie powinno się ich stosować w przypadku jakiś kalkulacji
-Global Interpreter Lock zapobiega dwóm wątkom pracować jednocześnie więc jeden wątke będzie co jakiś czas przerywany, żeby drugi mógł pracować. Ma to na celu zapobieganie temu, że jeden wątek jest cały czas odpalony,
-Pozwala na większą konkurencyjność między wątkami tego samego procesu interpretera ale powoduje brak zwiększenia wydajności programu uruchomionego na komputerze wieloprocesorowym. Jednym z powodów takich ograniczeni jest język C w któ©ym jest naisany Ruby, a nie działa on dobrze w trybie wieloprocesorowym
+**Global Interpreter Lock(GIL)** - this is an algorithm used to prevent two threads from working simultaneously, interrupting the active thread from time to time so that the other thread can run. It allows for greater competition between threads of the same interpreter process, but results in a lack of performance enhancement for a program running on a multiprocessor computer. One of the reasons for such limitations is the C language in which Ruby is written that not work well in multiprocessing. 
 
-GIl nie jest stosowany w niektórych implementacjach Rubiego takich jak JRuby oraz Rubinus
+**GIl** is not used in some Ruby implementations such as JRuby and Rubinus
+
+Ruby also has a **Fiber** class which also uses concurrency in Ruby. The **Fiber** class allows for greater control in process management.
+
+In the case of **Thread**, your operating system decides when to start and stop threads, but thanks to **Fibers**, we can decide about it ourselves. Additionally, they consume less memory than **Threads**, which translates into execution time. The last difference is that **Thread** run in the background and **Fiber** becomes the main thread until you stop them.
+
+An example of the implementation of the Fiber class.
+
+``` Ruby
+f = Fiber.new do
+  puts 'Process Start'
+end
+```
+
+At this point, nothing has been started yet. We have to do this ourselves using the **resume** method.
+
+``` Ruby
+f.resume # => 'Process Start'
+```
+
+As we can see, the main thread does not have to be running for the above example to work properly.
+
+We can stop the process by using the **yield** method. In this example, we will stop the thread after the first print to the text in the console.
+
+``` Ruby
+f = Fiber.new do
+  puts 'Process Start'
+
+  Fiber.yield
+
+  puts 'Process End'
+end
+
+f.resume => 'Process Start' # => 'Process Start'
+```
+As you can see above, the process stop when it was supposed to stop. Now we can run it again.
+
+``` Ruby
+f.resume => 'Process End'
+```
+
+The thread started exactly where it stopped working the last time. We will try to start this thread again.
+
+``` Ruby
+f.resume => `resume': dead fiber called (FiberError)
+```
+
+In this example, Ruby throws an error because the thread has terminated.
