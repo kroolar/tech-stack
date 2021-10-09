@@ -6,22 +6,21 @@
 4. [Others](#others)
 
 ### <a name="performance">1. Performance</a>
+As promised, Ruby's 3.0 version is 3 times faster than Ruby 2.0. This was done thanks to the introduction of several CPU and Memory improvements.
 
-JEst 3 raz yszybszy od Ruby 2.0
+#### CPU Performance 
+**MJIT** was introduced in Ruby 2.6. **MJIT** stands for Method Based Just-in-Time compiler. By default, Ruby is compiled into YARV instructions, which are then run by a virtual machine. **MJIT** compiles repetitive code directly into bytecode, which speeds up the compiler's work.
 
-CPU optimatization 
-Poprawa MJIT, który by już przedstawiony w Ruby 2.6. Czym jest MJIT. JIT jest to Just-In-Time compiler, który konwertuje powtarzający się kod na kod bajtowy, który potem 
+#### Memory Performance
+Ruby 3 also brought some improvements to the garbage collector area. In version 3, the **Garbage Compaction** that was introduced in Ruby 2.7 has been improved. Compared to the old version, the new one has been completely automated to ensure proper memory use. Additionally, it groups scattered objects into one memory location so that this memory can later be used by larger objects.
 
-Memory optimization
-Zaszły istotne zmiany w Garbage collector
+### <a name="pc">2. Parallelism & Concurrency</a>
+Fiber Scheduler
 
-Wprowadzono Garbage Compaction, który był już dostępny w Ruby 2.7 ale zostałc całkowicie zautomatyzowany w nowej wersji
+Ractors(Experimental)
 
-2. Parallelism and Concurency
+### <a name="staticAnalysis">3. Static Analysis</a>
 
-FIbers
-
-3. Static analysis
 RBS
 
 RBS to język, który opisuje strukture programu Ruby i to jak zdefiniowane są klasy, metody, są zdefiniowane.
@@ -42,7 +41,8 @@ end
 Typeprof
 
 
-4. Other
+### <a name="others">4. Others</a>
+
 
 #### One-line pattern mathcing(Experimental)
 
