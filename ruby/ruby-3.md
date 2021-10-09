@@ -44,9 +44,43 @@ Typeprof
 
 4. Other
 
-Except Hash method
+#### One-line pattern mathcing(Experimental)
 
-Metoda, dostępna w Rails ,dotychczas nie dostępna w Ruby ejst dostępna.
+Dodano operator =>, który może być używany jako przypisanie prawostronne
+
+``` Ruby
+'John' => name
+name # => 'John'
+
+{ email: 'j.doe@mail.com', age: 25 } => { age: }
+age => 25
+```
+
+Operator in zwraca tera true lub false
+
+
+
+#### Endless method definition(Experimental)
+
+Pozwala tworzyć jednolinijkowe metody bez użycia keyword end
+
+Zamiast takiego kodu
+``` Ruby
+def double(number)
+  number * 2
+end
+```
+
+Możemy zrobić coś takiego
+``` Ruby
+def double(number) = number * 2
+
+triple(3) # => 6
+```
+
+#### Except Hash method
+
+Metoda except, która dotychczas była dostępna tylko w Railsach jest dostępna w Ruby.
 ``` Ruby
 user = {
   name: 'John',
