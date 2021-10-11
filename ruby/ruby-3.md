@@ -15,9 +15,7 @@ As promised, Ruby's 3.0 version is 3 times faster than Ruby 2.0. This was done t
 Ruby 3 also brought some improvements to the garbage collector area. In version 3, the **Garbage Compaction** that was introduced in Ruby 2.7 has been improved. Compared to the old version, the new one has been completely automated to ensure proper memory use. Additionally, it groups scattered objects into one memory location so that this memory can later be used by larger objects.
 
 ### <a name="pc">2. Parallelism & Concurrency</a>
-Fiber Scheduler
-
-Ractors(Experimental)
+### Ractors(Experimental)
 
 ### <a name="staticAnalysis">3. Static Analysis</a>
 
