@@ -15,7 +15,9 @@ As promised, Ruby's 3.0 version is 3 times faster than Ruby 2.0. This was done t
 Ruby 3 also brought some improvements to the garbage collector area. In version 3, the **Garbage Compaction** that was introduced in Ruby 2.7 has been improved. Compared to the old version, the new one has been completely automated to ensure proper memory use. Additionally, it groups scattered objects into one memory location so that this memory can later be used by larger objects.
 
 ### <a name="pc">2. Parallelism & Concurrency</a>
+
 ### Ractors(Experimental)
+Normalnie za blokowanie wątków odpowiada Global VM Lock i pozwala uruchamiać się tylko jednemu wątkąwi na raz. W nowym Ruby nowa klase, która usprawnia równoległość Ractors. Każdy ractor posiada swój własny lock, dzięki czemu tworząc kilka ractorów jesteśmy w stanie na prawdę wykorzystać równoległość. Ractory mogą mieć więcej niż jeden wątek więc w przypadku wątków uruchamianych w Ractorze nadal mówimy o współbieżności ale Ractory pracują między sobą równolegle
 
 ### <a name="staticAnalysis">3. Static Analysis</a>
 
