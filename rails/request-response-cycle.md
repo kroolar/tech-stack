@@ -1,29 +1,21 @@
 # Request-Response Cycle
 
-A user opens his browser, types in a URL, and presses Enter. When a user presses Enter, the browser makes a request for that URL.
-The request hits the Rails router (config/routes.rb).
-The router maps the URL to the correct controller and action to handle the request.
+1. To start the request-response cycle, the user must enter an address in the browser or click on a link. For examples it will be: _https://rails-app.com/users_
 
-The action receives the request, and asks the model to fetch data from the database.
-The model returns a list of data to the controller action.
-The controller action passes the data on to the view.
-The view renders the page as HTML.
-The controller sends the HTML back to the browser. The page loads and the user sees it.
+2. The request is sent to DNS servers, which are responsible for translating the domain name into an IP address. For example:  _https://rails-app.io/users_ _=> 212.85.96.183_
 
-- Żądanie do URL-a
+3. Having the IP address of our server, the browser is able to connect to it.
 
-- Rails sprawdza router (config/routes.rb)
+4. After receiving the request, the server processes the path given in the URL address and checks if any controller matches the given path. In this case, the path **/users** corresponds to the controller **UsersController**.
 
 ``` Ruby
 Rails.application.routes.draw do
-  resources :users
+  resources :users, only: :index # GET /receipts(.:format) receipts#index
 end
-
- GET    /receipts(.:format)  receipts#index
-
 ```
+<br>
 
-Railsy szukają kontrolera o takiej nazwie, a następnie próbują dopasować akcje, żądania do metody w kontrolerze
+5. Each controller can have many methods, so in addition to the path itself, Rails must also check what action was sent to run the appropriate method. In this case, the router directs us to the **index**.
 
 ``` Ruby
 class UsersController < ApplicationController
@@ -32,7 +24,13 @@ class UsersController < ApplicationController
   end
 end
 ```
+<br>
 
-W tym przypadku dodatkowo pobierają za pomocą modelu User dabe z bazy danych.
+6. In this case, the controller send query to the database using User model and return data.
 
-W tym momencie dane, użytkowników są udostępnione do widoku.
+``` Ruby
+User.all # => "SELECT `users`.* FROM `users` WHERE `users`.`deleted_at` IS NULL ORDER BY `users`.`name` ASC"
+```
+<br>
+
+7. The data fetched in a given controller method is used in the view with the same name, which, if not specified otherwise, is by default returned to the browser with the status **200**.
