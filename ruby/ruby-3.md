@@ -16,16 +16,24 @@ Ruby 3 also brought some improvements to the garbage collector area. In version 
 
 ### <a name="pc">2. Parallelism & Concurrency</a>
 
-### Ractors(Experimental)
-Normalnie za blokowanie wątków odpowiada Global VM Lock i pozwala uruchamiać się tylko jednemu wątkąwi na raz. W nowym Ruby nowa klase, która usprawnia równoległość Ractors. Każdy ractor posiada swój własny lock, dzięki czemu tworząc kilka ractorów jesteśmy w stanie na prawdę wykorzystać równoległość. Ractory mogą mieć więcej niż jeden wątek więc w przypadku wątków uruchamianych w Ractorze nadal mówimy o współbieżności ale Ractory pracują między sobą równolegle
+#### Ractors(Experimental)
+Normally, Global VM Lock is responsible for blocking threads and only allows one thread to run at a time. In the Ruby 3, a new class that improves Ractors parallelism. Each ractor has its own lock, thanks to which, by creating several ractors, we are able to really use parallelism. Ractors can have more than one thread, so in the case of threads running in Ractor we are still talking about concurrency, but Ractory work in parallel with each other.
+
+``` Ruby
+ractor = Ractor.new { puts "Hello World!" }
+
+ractor.take
+```
+
+#### Fiber Scheduler(Experimental)
+
+The scheduler was created to improve threads managment. It allows you to intercept blocking operations. It is an interface that allows you to wrap your code with gems like **EventMachine** or **ASync**. It allows you to separate the implementation of async from the application code.
 
 ### <a name="staticAnalysis">3. Static Analysis</a>
 
-RBS
+#### RBS
 
-RBS to język, który opisuje strukture programu Ruby i to jak zdefiniowane są klasy, metody, są zdefiniowane.
-
-RBS pozwala pisać definicje klas, modułów, metod, zmiennych, typów zmiennych oraz dziedziczenia. Wspiera również powszechnie stosowane wzorce w  Ruby oraz unions and duck typing
+RBS is a language that describes strcture of Ruby code and how to define its class and methods. RBS allows you to write classess, modules, methods, variables and inheritance definitions. It also supports duck typing.
 
 ``` Ruby
 # user.rbs
@@ -38,40 +46,77 @@ class User
 end
 ```
 
-Typeprof
+RBS It is programmed in such a way that it does not force us to use it, but we get a new tool that allows us to create better software, so we can easily introduce it in old projects.
 
+#### Advantages of typing in Ruby:
+
+- **Finding Bugs**: Typing helps finding more bugs faster.
+- **NIL**: Type checkers significantly improve work with nil, so they can check whether the value can be nil or should be given, which allows for less frequent use of the navigational safety operator.
+- **Better IDE integration**: Parsing RBS files gives our IDE a better understanding of how our code should work
 
 ### <a name="others">4. Others</a>
 
-
 #### One-line pattern mathcing(Experimental)
 
-Dodano operator =>, który może być używany jako przypisanie prawostronne
+Added new operator **=>,** that can be using as a right-way assigment.
 
 ``` Ruby
 'John' => name
-name # => 'John'
+puts name # => 'John'
 
 { email: 'j.doe@mail.com', age: 25 } => { age: }
-age => 25
+puts age => 25
 ```
 
-Operator in zwraca tera true lub false
+#### Find pattern
+``` Ruby
+users = [
+  { name: 'Oliver', role: 'CTO' },
+  { name: 'Sam', role: 'Manager' },
+  { role: 'customer' },
+  { name: 'Eve', city: 'New York' },
+  { name: 'Peter' },
+  { city: 'Chicago' }
+]
 
+users.each do |person|
+  case person
+  in { name:, role: 'CTO' }
+    p "#{name} is the Founder."
+  in { name:, role: designation }
+    p "#{name} is a #{designation}."
+  in { name:, city: 'New York' }
+    p "#{name} lives in New York."
+  in {role: designation}
+    p "Unknown is a #{designation}."
+  in { name: }
+    p "#{name}'s designation is unknown."
+  else
+    p "Pattern not found."
+  end
+end
 
+"Oliver is the Founder."
+"Sam is a Manager."
+"Unknown is a customer."
+"Eve lives in New York."
+"Peter's designation is unknown."
+"Pattern not found."
+```
 
 #### Endless method definition(Experimental)
 
-Pozwala tworzyć jednolinijkowe metody bez użycia keyword end
+Allow to create one-line methods without **end** keyword
 
-Zamiast takiego kodu
+Old way:
+
 ``` Ruby
 def double(number)
   number * 2
 end
 ```
+New way:
 
-Możemy zrobić coś takiego
 ``` Ruby
 def double(number) = number * 2
 
@@ -80,7 +125,8 @@ triple(3) # => 6
 
 #### Except Hash method
 
-Metoda except, która dotychczas była dostępna tylko w Railsach jest dostępna w Ruby.
+Except method, that was only available in Rails is now availabel in Ruby.
+
 ``` Ruby
 user = {
   name: 'John',
@@ -88,5 +134,30 @@ user = {
   age: 35
 }
 
-user.except(:age) # => { 
+user.except(:age) # => { name: 'John', email: 'john.doe@mai;.com' }
 ```
+
+#### Arguments forwarding
+
+Argument forwarding **...** is a shortcut that allows you to pass various arguments.
+
+Old way:
+
+``` Ruby
+class User
+  def initialize(*args, **kwargs, &block)
+    create(*args, **kwargs, &block)
+  end
+end
+```
+
+New way:
+
+``` Ruby
+class User
+  def initialize(...)
+    create(...)
+  end
+end
+```
+
