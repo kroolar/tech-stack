@@ -10,7 +10,7 @@
 - [Development vs Production](https://github.com/kroolar/tech-stack/blob/master/rails/dev-prod.md)
 - [Deployment](https://github.com/kroolar/tech-stack/blob/master/rails/deployment.md)
 - [Conventions](https://github.com/kroolar/tech-stack/blob/master/rails/conventions.md)
-- [Servers](https://github.com/kroolar/tech-stack/blob/master/rails/servers.md)
+- [App Servers](https://github.com/kroolar/tech-stack/blob/master/rails/app-servers.md)
 
 ### Software Design
 - [OOP](https://github.com/kroolar/tech-stack/blob/master/software-design/oop.md)
