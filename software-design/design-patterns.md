@@ -32,7 +32,7 @@ Design pattern is a typical solution to frequently encountered problems in softw
 - [Singleton]
 
 #### Structual
-- [Adapter](https://github.com/kroolar/tech-stack/master/software-design/design-patterns/adapter.md)
+- [Adapter](https://github.com/kroolar/tech-stack/blob/master/software-design/design-patterns/adapter.md)
 - [Bridge]
 - [Composite]
 - [Decorator]
