@@ -87,4 +87,4 @@ Authenticate.new.create_account(client_adapter) # => Account successfully create
 - https://refactoring.guru/design-patterns/adapter/ruby/example
 - https://github.com/davidgf/design-patterns-in-ruby/blob/master/adapter.md
 - https://medium.com/@dljerome/design-patterns-in-ruby-adapter-89a482c26d8c
-
+j
