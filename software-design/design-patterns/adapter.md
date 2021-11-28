@@ -1,14 +1,10 @@
 # Adapter
 
-**Type**: Structural
-
-**Goal**: Allow to communicate between two object with incompatible interface
+Structural design pattern that allows communication between objects with incompatible interfaces
 
 ### Problem
-Code
-Solution
 
-Nasza firma posiada wewnętrzny produkt z którego mogą korzystać tylko pracownicy. Żeby utworzyć konto w aplikacji każdy pracownik musi posiadać firmowy email oraz stanowisko, które będzie odpowiedzialne za przyznawanie uprawnień do aplikacji. Jeden z klientów także zażyczył sobie dostęp do aplikacji, jednakże aplikacja ma tylko informacje o imieniu i nazwisku klienta. 
+The company has an internal product that only employees can access. To create an account in the application, each employee must have a company email and assigned position that will be responsible for granting access to the application. One of the clients requested access to the application, however the application only has information about the client's name and surname.
 
 ``` Ruby
 class Employee
@@ -51,7 +47,9 @@ Authenticate.new.create_account(employee) # => Account successfully created!
 Authenticate.new.create_account(client) # => raise Error
 ```
 
-Jak widzimy interfejs klasy Client nie pasuje do klasy Authenticate. W takim przypadku możemy opakować klasę Client, klasą ClientAdapter, a następnie dopasować jej interfejs tak, żeby pasował do metody create_account. 
+### Solution
+
+As we can see, the interface of the **Client** class does not match the **Authenticate** class. In this case, we can use the adapter pattern by wrapping the **Client** class with the **ClientAdapter** class, and then prepare its interface to match the **create_account** method.
 
 ``` Ruby
 class ClientAdapter
@@ -77,7 +75,8 @@ Authenticate.new.create_account(client_adapter) # => Account successfully create
 ```
 
 **Pros:**
-- Communication interface is separated from business logic
+- Communication interface is separated from business logic (SRP)
+- You can add new adapters to existing code without breaking it (OCP)
 
 **Cons:**
 - Increase complexity. Sometimes it’s better rebuild the class
