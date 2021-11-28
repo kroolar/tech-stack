@@ -25,11 +25,11 @@ Design pattern is a typical solution to frequently encountered problems in softw
 ### <a name="patterns">4. Patterns</a>
 
 #### Creational
-- [Abstract Factory]
-- [Builder]
-- [Factory Method]
-- [Prototype]
-- [Singleton]
+- [Abstract Factory](https://github.com/kroolar/tech-stack/blob/master/software-design/design-patterns/abstract-factory.md)
+- [Builder](https://github.com/kroolar/tech-stack/blob/master/software-design/design-patterns/builder.md)
+- [Factory Method](https://github.com/kroolar/tech-stack/blob/master/software-design/design-patterns/factory-method.md)
+- [Prototype](https://github.com/kroolar/tech-stack/blob/master/software-design/design-patterns/prototype.md)
+- [Singleton](https://github.com/kroolar/tech-stack/blob/master/software-design/design-patterns/singleton.md)
 
 #### Structual
 - [Adapter](https://github.com/kroolar/tech-stack/blob/master/software-design/design-patterns/adapter.md)
