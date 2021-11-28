@@ -33,21 +33,21 @@ Design pattern is a typical solution to frequently encountered problems in softw
 
 #### Structual
 - [Adapter](https://github.com/kroolar/tech-stack/blob/master/software-design/design-patterns/adapter.md)
-- [Bridge]
-- [Composite]
-- [Decorator]
-- [Facade]
-- [Flyweight]
-- [Proxy]
+- [Bridge](https://github.com/kroolar/tech-stack/blob/master/software-design/design-patterns/bridge.md)
+- [Composite](https://github.com/kroolar/tech-stack/blob/master/software-design/design-patterns/composite.md)
+- [Decorator](https://github.com/kroolar/tech-stack/blob/master/software-design/design-patterns/decorator.md)
+- [Facade](https://github.com/kroolar/tech-stack/blob/master/software-design/design-patterns/facade.md)
+- [Flyweight](https://github.com/kroolar/tech-stack/blob/master/software-design/design-patterns/flyweight.md)
+- [Proxy](https://github.com/kroolar/tech-stack/blob/master/software-design/design-patterns/proxy.md)
 
 #### Behavioral
-- [Chain of Responsibility]
-- [Command]
-- [Iterator]
-- [Mediator]
-- [Memento]
-- [Observer]
-- [State]
-- [Strategy]
-- [Template Method]
-- [Visitor]
+- [Chain of Responsibility](https://github.com/kroolar/tech-stack/blob/master/software-design/design-patterns/chain-of-responsibility.md)
+- [Command](https://github.com/kroolar/tech-stack/blob/master/software-design/design-patterns/command.md)
+- [Iterator](https://github.com/kroolar/tech-stack/blob/master/software-design/design-patterns/iterator.md)
+- [Mediator](https://github.com/kroolar/tech-stack/blob/master/software-design/design-patterns/mediator.md)
+- [Memento](https://github.com/kroolar/tech-stack/blob/master/software-design/design-patterns/memento.md)
+- [Observer](https://github.com/kroolar/tech-stack/blob/master/software-design/design-patterns/observer.md)
+- [State](https://github.com/kroolar/tech-stack/blob/master/software-design/design-patterns/state.md)
+- [Strategy](https://github.com/kroolar/tech-stack/blob/master/software-design/design-patterns/strategy.md)
+- [Template Method](https://github.com/kroolar/tech-stack/blob/master/software-design/design-patterns/template-method.md)
+- [Visitor](https://github.com/kroolar/tech-stack/blob/master/software-design/design-patterns/visitor.md)
