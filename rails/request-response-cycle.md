@@ -15,7 +15,6 @@ Rails.application.routes.draw do
   resources :users, only: :index # GET /receipts(.:format) receipts#index
 end
 ```
-<br>
 
 5. Each controller can have many methods, so in addition to the path itself, Rails must also check what action was sent to run the appropriate method. In this case, the router directs us to the **index**.
 
@@ -28,14 +27,12 @@ class UsersController < ApplicationController
   end
 end
 ```
-<br>
 
 6. In this case, the controller send query to the database using **User** model, retrive all users and assigned them to **@users** variable which is passed to the index view.
 
 ``` Ruby
 User.all # => "SELECT `users`.* FROM `users` WHERE `users`.`deleted_at` IS NULL ORDER BY `users`.`name` ASC"
 ```
-<br>
 
 7. The data fetched in a given controller method is used using embedded Ruby in the view with the same name, if not specified otherwise.
 
@@ -44,6 +41,5 @@ User.all # => "SELECT `users`.* FROM `users` WHERE `users`.`deleted_at` IS NULL 
   <%= user.name %>
 <% end %>
 ```
-<br>
 
 8. By default controller return the HTML back to the browser with status **200**.
