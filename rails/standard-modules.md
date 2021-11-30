@@ -52,16 +52,33 @@ component responsible for providing Ruby language extensions, utilities, and oth
 Za ubogacenie wysiwyg editor
 
 ### <a name="actionView">8. Action View</a>
-Action View jest odpowiedzialny za widoki w Rails i wszystko co jest z nimi powiązane w tym:
-- Partiale
-- Helpery
-- Layouty
+Action View is responsible for views in Rails and everything related to them.
 
-Widoki
-Templates
-Partials
-Layouts
-ERB
+All views are in _app/views_ folder. Folder names are related to the controllers, and the views inside are related to the controller's actions.
+
+#### Templates
+##### ERB
+In this format it is possible to embed Ruby code directly into the view with <% %> and <%= %>
+
+##### Builder
+It is a more programmatic alternative to ERB. Most often it is used for generating XML content.
+
+##### Jbuilder
+It is a gem that comes with a Rails application by default. It is similar to the builder but the most used one for generating JSON.
+
+#### Partials
+They allow pieces of code to be broken down into smaller, reusable parts. When creating parts, we should precede them with an underscore, e.g. _'_nav.html.erb'_. We can pass additional parameters and even entire collections to it.
+
+#### Layotus
+Layouts provide a common interface for views with similar purposes.
+
+#### Helpers
+Rails provides many helpers available in views. The most important of them are:
+- Formatting dates, strings and numbers
+- Creating HTML links to images, videos, stylesheets, etc...
+- Sanitizing content
+- Creating forms
+- Localizing content
 
 ### <a name="activeJob">9. Active Job</a>
 This module is responsible for creating jobs, i.e. tasks that are performed asynchronously. In addition, it allows them to be queued and run according to the schedule provided. The Active Job module focuses on creating a coherent and logical infrastructure for the job runners no matter what we use.
