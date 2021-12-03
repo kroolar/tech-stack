@@ -1,48 +1,50 @@
 # Application Servers
 
-### 1. Czym jest web server
-We serwer jest odpowiedzialny za obsługe żądań między strony internetowej. W przypadku standardowej statycznej strony internetowej wszystkie jej zasoby tj. pliki html, CSS, JS oraz obrazki się nie zmieniają dlatego klient wysyła żądanie o jakiś zasób i otrzymuje go z powrotem zawsze w takim samym stanie.
+### 1. What is Web Server
+The server is responsible for handling requests between the website. In the case of a standard static website, all its resources, i.e. html, CSS, JS files and pictures, do not change, so the client sends a request for a resource and always receives it back in the same state.
 
-### 2. Czym jest app server
-Aplikacja internetowa jest bardziej złożóna. Uzytkownik może nie tylko obierać dane ale także na nie wpływać poprzez ich dodawanie, usuwanie lub modyfikacje. Serwer aplikacji jest pośrednikiem między klientem, który wysyła żądanie, a logiką biznesową(kodem), która to żadanie wykonuje, a następnie zwraca odpowiedź klientowi. Serwer aplikacji może działać bez serwera webowego, ale najczęściej znajduję się przed nim zajmując się zarządzaniem requestami i przekazywaniu ich do serwera aplikacji.
+### 2. What is App Server
+The web application is more complex. The user can not only select data but also influence it by adding, deleting or modifying it. The application server acts as an intermediary between the client that sends the request and the business logic (code) that performs the request, and then returns the response to the client. The application server can run without a web server, but most often its located in front of it dealing with the management of requests and their forwarding to the application server.
 
-### 3. Pojęcia
+### 3. Concepts
 
 #### Clustering
-Cluster to grupa maszyn(computer or servers) dedykowana do jednego celu. Proces grupowania serverów nazywa się clusteringiem. W tym przypadku może to być kilka serweróœ na których zainstalowana jest ta sama aplikacja. Pojęcie to odnosi się to używania oprogramowania, które pozwala zarządzać tymi serwerami(klastrem), dzięki czemu można lepiej rozłożyć ruch co poskutkuje szybszymi odpowiedziami oraz systemem bardziej odpornym na błędy.
+Cluster is a group of machines (computer or servers) dedicated to one purpose. The process of grouping servers is called clustering. In this case, it can be several servers with the same application installed. This term refers to the use of software that allows you to manage these servers (cluster), thanks to which you can better distribute the traffic, which will result in faster responses and a system more resistant to errors.
 
 #### Multhithreaded
-Wielowątkowość jest to funkcja, dzięki, której CPU jest w stanie uruchomić i obsługiwać więcej niż jeden wątek, korzystająć z tych samych zasób równolegle
+Multithreading is a function thanks to which the CPU is able to start and operate more than one thread, use the same resources in parallel.
 
 #### Slow client buffering
-Buffering jest funkcjonalnością, która pozwala na pre-laoding części danych przed ich użyciem.
+Buffering is a functionality that allows you to pre-laod parts of your data before it is used.
 
 #### Zero Downtime Deploy
-Pojęcie to oznacza, żę aplikacja nigdy nie zostanie wyłączona ani niestabilna podczas procesu deploymentu. Aby to osiągnąć serwer musi poczekać z serwowaniem nowej wersji dopóki proces się nie zakończy.
+This concept means that the application will never be disabled or unstable during the deployment process. To achieve this, the server has to wait until the process is finished serving the new version.
 
 #### ActionCable
-Jest to moduł, który pozwala na integracje aplikacji Rails z WebSockets.
+It is a module that allows you to integrate Rails applications with WebSockets.
 
 ### 4. Serwer Railsowe
-Najczęściej używanymi serwerami w aplikacjach rails są:
+The most used servers in rails applications are:
 
 - Puma
 - Unicorn
 - Passenger
 
-### Puma
+#### Puma
 https://github.com/puma/puma
 
-Puma jest lekkim i szybkim serwerem. Jest domyśłnym serwerem dla aplikacji railsowej i idealny do rozpoczęcia przygody z rails od razu do użycia.  Jest wskazany do użytko zarówno do użytku na produkcji oraz developmencie
+Puma is a light and fast server. It is the default server for a rails application and perfect for getting started with rails right away. It is indicated for use both in production and development.
 
 #### Unicorn
+https://github.com/defunkt/unicorn
 
 #### Passenger
-W porównaniu do resezty posiada bardziej złożoną konfiguracje co pozwla na lepsze zarządzanie serwer sczególnie w środowisku produkcjnym.
+https://www.phusionpassenger.com/
+
+Compared to the rest, it has a more complex configuration, which allows for better management of the server, especially in the production environment.
 
 
-- Mongrel
-- Thin
+### Comparison
 
 ```
                          | UNICORN | PUMA | PASSENGER |
@@ -58,3 +60,7 @@ ActionCable              |   ✅    |  ✅  |    ✅     |
 Zero-Downtime Deploys    |   ✅    |  ✅  |    ✅     |
 -------------------------|---------|------|------------
 ```
+
+### There are also some less common alternatives that are used with rails
+- Mongrel (https://mongrel2.org/)
+- Thin (https://github.com/macournoyer/thin)
