@@ -74,7 +74,7 @@ With a common parent, we can begin to build subclasses based on individual state
 ``` Ruby
 class NewState < State
   def next_state
-    @order.state = InProgressState
+    @order.state = InProgressState.new
   end
   
   def pay
@@ -84,13 +84,13 @@ end
 
 class InProgressState < State
   def next_state
-    @order.state = ReadyState
+    @order.state = ReadyState.new
   end
 end
 
 class Ready < State
   def next_state
-    @order.state = ReceivedState
+    @order.state = ReceivedState.new
   end
 
   def take
