@@ -4,7 +4,29 @@ Description
 
 ### Problem
 
+``` Ruby
+class View
+  def title
+    'Hello'
+  end
+  
+  def body
+    'Some text'
+  end
+  
+  def footer
+    '2020 Copyright'
+  end
+end
+```
+
 ### Solution
+
+``` Ruby
+  class Languages
+    def title
+  end
+```
 
 **Pros:**
 - You can create platform-independent classes and apps
