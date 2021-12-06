@@ -1,30 +1,48 @@
 # Bridge
 
-Description
+It separates the abstractions of its implementation, so you can modify these two elements independently.
 
 ### Problem
 
+Mamy klasę Users, która pozwala pobierać dane z różnych zasobów. Dodając nowe metody, będziemy musieli w nihc uwzględnić wszystkie zewnętrzne zasoby, z których będziemy pobierać dane. Jednocześnie dodająć kolejną integracje będziemy musieli wszystko modyfikować.
+
 ``` Ruby
-class View
-  def title
-    'Hello'
-  end
-  
-  def body
-    'Some text'
-  end
-  
-  def footer
-    '2020 Copyright'
+class Users
+  def all(from)
+    if from == 'CRM'
+      # Get Users from CRM
+    else
+      # Get Users from application DB
+    end
   end
 end
 ```
 
 ### Solution
 
+Wzorzec Bridge pozwala na oddzielenie abstrakcji od implementacji co pozwoli na osobne rozwijanie obu tych części oddzielnie
+
 ``` Ruby
-  class Languages
-    def title
+  class User
+    def initialize(implementation)
+      @implementation = implementation
+    end
+    
+    def all
+      @implementation.all
+    end
+  end
+
+  class AppUsers
+    def all
+      # Get application Users
+    end
+  end
+  
+  class CRMUsers
+    def all
+      # Get users from CRM
+    end
   end
 ```
 
