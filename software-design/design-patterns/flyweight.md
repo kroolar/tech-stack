@@ -1,6 +1,6 @@
 # Flyweight
 
-A structured design pattern that allows you to reduce RAM consumption by sharing states between similar objects.
+A structural design pattern that allows you to reduce RAM consumption by sharing states between similar objects.
 
 - **Flyweight**: A common object that can be used in multiple contexts. It stores common state.
 - **Flyweight Factory**: Class responsible for creating and storing Flyweight objects.
