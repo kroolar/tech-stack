@@ -4,7 +4,7 @@ It separates the abstractions of its implementation, so you can modify these two
 
 ### Problem
 
-Mamy klasę Users, która pozwala pobierać dane z różnych zasobów. Dodając nowe metody, będziemy musieli w nihc uwzględnić wszystkie zewnętrzne zasoby, z których będziemy pobierać dane. Jednocześnie dodająć kolejną integracje będziemy musieli wszystko modyfikować.
+We have a **Users** class that allows you to retrieve data from various resources. When adding new methods, we will have to include all external resources from which we will retrieve data. At the same time, when adding another integration, we will have to modify everything.
 
 ``` Ruby
 class Users
@@ -20,30 +20,36 @@ end
 
 ### Solution
 
-Wzorzec Bridge pozwala na oddzielenie abstrakcji od implementacji co pozwoli na osobne rozwijanie obu tych części oddzielnie
+The Bridge pattern allows you to separate the abstraction from the implementation, which will allow you to develop both of these parts separately.
 
 ``` Ruby
-  class User
-    def initialize(implementation)
-      @implementation = implementation
-    end
-    
-    def all
-      @implementation.all
-    end
+class User
+  def initialize(implementation)
+    @implementation = implementation
   end
 
-  class AppUsers
-    def all
-      # Get application Users
-    end
+  def all
+    @implementation.all
   end
-  
-  class CRMUsers
-    def all
-      # Get users from CRM
-    end
+end
+
+class AppUsers
+  def all
+    # Get application Users
   end
+end
+
+class CRMUsers
+  def all
+    # Get users from CRM
+  end
+end
+
+crm_user = User.new(CRMUsers.new)
+crm_user.all # => Get Users from CRM
+
+app_users = User.new(AppUsers.new)
+app_users.all # => Get Users from DB
 ```
 
 **Pros:**
