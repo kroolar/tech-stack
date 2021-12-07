@@ -1,7 +1,56 @@
 # Flyweight
 
-### Problem
+A structured design pattern that allows you to reduce RAM consumption by sharing states between similar objects.
+
+- **Flyweight**: A common object that can be used in multiple contexts. It stores common state.
+- **Flyweight Factory**: Class responsible for creating and storing Flyweight objects.
+
 ### Solution
+``` Ruby
+# Flyweight
+class Color
+  attr_reader :name
+
+  def initialize(name)
+    @name = name
+  end
+end
+
+# Flyweight Factory
+class ColorFactory
+  attr_reader :colors
+
+  def initialize
+    @colors = {}
+  end
+  
+  def find_color(name)
+    if colors.has_key?(name)
+      color = colors[name]
+    else
+      color = Color.new(name)
+      colors[name] = color
+    end
+
+    color
+  end
+end
+
+# Context of Use
+class Canvas
+  attr_reader :color_factory
+
+  def initialize
+    @color_factory = ColorFactory.new
+  end
+  
+  def draw(x:, y:, color:)
+    color = color_factory.find_color(color)
+    
+    # assign coordinates...
+  end
+end
+```
 
 **Pros:**
 - You can save lots of RAM, assuming your program has tons of similar objects
