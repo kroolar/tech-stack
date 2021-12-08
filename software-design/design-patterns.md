@@ -43,6 +43,7 @@ Design pattern is a typical solution to frequently encountered problems in softw
 #### Behavioral
 - [Chain of Responsibility](https://github.com/kroolar/tech-stack/blob/master/software-design/design-patterns/chain-of-responsibility.md)
 - [Command](https://github.com/kroolar/tech-stack/blob/master/software-design/design-patterns/command.md)
+- [Interpreter](https://github.com/kroolar/tech-stack/blob/master/software-design/design-patterns/interpreter.md)
 - [Iterator](https://github.com/kroolar/tech-stack/blob/master/software-design/design-patterns/iterator.md)
 - [Mediator](https://github.com/kroolar/tech-stack/blob/master/software-design/design-patterns/mediator.md)
 - [Memento](https://github.com/kroolar/tech-stack/blob/master/software-design/design-patterns/memento.md)
