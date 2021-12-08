@@ -1,7 +1,45 @@
 # Strategy
 
+A behavioral design pattern that allows you to define a common algorithm and then put its implementations into separate classes.
+
 ### Problem
+
+We want to create a system that will allow us to save files in various formats. One class will be responsible for everything, but individual implementations will be created in different classes, which will be passed to the base class.
+
 ### Solution
+
+``` Ruby
+class File
+  attr_reader :name, :text, :formatter
+
+  def initialize(name:, text:, formatter:)
+    @name = name
+    @text = text
+    @formatter = formatter
+  end
+  
+  def create
+    @formatter.create(self)
+  end
+end
+
+class DocFile
+  def create(context)
+    @doc = Doc.new(context.name)
+    @doc.body = context.text
+    @doc.save
+  end
+end
+
+class XlsFile < File
+  def open(context)
+    @xls = Xls.new(context.name)
+    @worksheet = @xls.add_worksheet
+    @worksheet.write(0, 0, context.text)
+    @xls.save
+  end
+end
+```
 
 **Pros:**
 - You can swap algorithms used inside an object at runtime
