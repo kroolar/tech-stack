@@ -1,6 +1,6 @@
 # Visitor
 
-Creational design pattern that allows you to define new operations without changing the classes on which it works. In Ruby it is practically not used because most of its functionality can be replaced with a simple block.
+Behavioral design pattern that allows you to define new operations without changing the classes on which it works. In Ruby it is practically not used because most of its functionality can be replaced with a simple block.
 
 ### Problem
 
