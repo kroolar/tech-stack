@@ -3,6 +3,24 @@
 ### Problem
 ### Solution
 
+``` Ruby
+class Parser
+  def initialize(text)
+    @tokens = text.split
+  end
+  
+  def expression
+    if token.nil? || tok
+  end
+  
+  def next
+    @to
+  end
+end
+
+Parser.new("Add three to four").evaluate
+```
+
 **Pros:**
 - Easy to implement
 - Extendable and easy to change
