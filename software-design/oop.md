@@ -60,7 +60,68 @@ Instancja jest określeniem danego obiektu w kontekście do jego klasy.(np. Obie
 ### <a name="fourPillars">2. Four Pillars</a>
 
 #### Encapsulation
+Jest procesem, który pozwala opakowywać pewne dane w pojedyncze jednostki.
+
+W poniższym przykładzie mamy jedną klasę App, która reprezentuje całą naszą aplikacje. Klasa ta posiada kilka metod odnoszących się do użytkowników oraz pracowników.
+
+``` Ruby
+class App
+  def create_user(user, params)
+    # Do something
+  end
+  
+  def update_employee(employee, params)
+    # Do something
+  end
+  
+  def delete_user(user)
+    # Do something
+  end
+end
+```
+Powołując się na enkapsulacje możemy je podzielić na mniejsze jednostki
+
+``` Ruby
+class User
+  def create(params)
+    # Do something
+  end
+  
+  def delete
+    # Do something
+  end
+end
+
+class Employee
+  def update(params)
+    # Do soemthing
+  end
+end
+```
+
 #### Abstraction
+
+Abstrakcja pozwala ukryć detale, które nie są istotne takie jak implementacja i pokazać tylko te które są niezbędne. Użytkownik nie musi mieć dostepu do wszystkich części kodu wystarczy mu prosty interfejs z którego będzie korzystał.
+
+``` Ruby
+class CRM
+  def users
+    get('/users')
+  end
+  
+  private
+  
+  def access_token
+    # Do something
+  end
+  
+  def get(method)
+    response = HTTParty.get(method, access_token)
+    
+    response.body
+  end
+end
+```
 #### Inheritance
 Termin ten odnosi się do możliwośći dziedziczenia pwenych cech i właściwości z innych klas. Stworzymy klasę Car, i umieścimy w niej metodę odpowiedzialna za uruchomienie silnika.
 
@@ -100,7 +161,7 @@ W jezyku Ruby dostępne jest tylko pojedyncze dziedziczenie co oznacza, że klas
 
 #### Polymorphism
 
-Polimorfizm oznacza zdolność do przyjmowania wielu form. W kontekście programowania ejst to najczęściej udostępnianie jednego wspólnego interfejsu. który może być używany przez różne obiekty. W języku Ruby możemy osiągnąć polimorfizm na trzy różne sposoby
+Polimorfizm oznacza zdolność do przyjmowania wielu form. W kontekście programowania określa, że jedna czynność może być wykonywana na różne sposoby. W języku Ruby możemy osiągnąć polimorfizm na trzy różne sposoby
 
 ##### Inheritance
 
@@ -140,8 +201,54 @@ Obiekty, które dziedzczą z klasy bazowej powinny być w stanie zastępować o
 
 ### <a name="principles">4. Principles</a>
 
+### Law of Demether
+Czasem znana jako Principle of least knowledge. Określa, że obiekt powinien rozmawiać tylko i wyłącznie ze swoimi najlbiższymi obiektami. Obiekt nie powinien wykonywać metody prze inny obiekt.
+
+W Rails przez asocjacje często tworzymy ogromne niepotrzebne łanuchy metod. Weźmy ten przykład.
+
+``` Ruby
+class User < ApplicationRecord
+  belongs_to: company
+end
+
+class Company < ApplicationRecord
+  has_many :users
+end
+```
+Comapny przechowuje swoją nazwę, więc jeśli chcemy wywołać nazwę firmy z poziomu użytkownika możemy to zrobić w taki sposób.
+
+``` Ruby
+users.company.name
+```
+To jest właśnie złamanie prawa Law of Demeter. Obiekt nie powinien kontaktować się z metodami innych obiektów. Jeśli chcemy pobrać nazwę firmy powinniśmy zrobić to w ten sposób.
+
+``` Ruby
+class User < ApplicationRecord
+  belongs_to: company
+  
+  def company_name
+    company.name
+  end
+end
+
+user.company_name
+```
+
+Railsy dodatkowo są wyposażone w tzw. delegatory, które pozwalają skrócić ten zapis. Odpowiednikiem powyższego przykłądu jest ten poniżej
+
+``` Ruby
+class User < ApplicationRecord
+  belongs_to: company
+  
+  delegate :name, to: :company
+end
+```
+
 ### KISS
-Keep it simple stupid
+Keep It Simple, Stupid - Określa sposób projektowania w taki, żeby robić co jak najprośćiej, używająć jak naprostszych narzędzi bez żadnych udziwnień taka, żeby struktura nie zawierała niepotrzebnych elementów oraz, żeby każdy nawet najmniej uzdolniony z zespołu mógł to zrozumieć.
+
 ### YAGNI
+You Aren't Gonna Need It - Odnośi się do nie tworzenia niepotrzebnego kodu. Czasem może się wydawać, że jakaś implementacja ma sens i może się przydać w przyszłości ale okazuje się, że jest nie działa zvyt dobrze, lub jest całkowicie niepotrzebna przez co trzeba refaktorować kod lub całkowicie go usunąc. Dlatego metoda ta mówi o tym, żeby odkładać pisanie kodu na później.
+
 ### DRY
-Don't repeat yourself
+Don't Repeat Yourself - Jak sama nazwa wskazuje odnosi się do tego, żeby sie nie powtarzać. Nie chodzi tu tylko o unikanie pisania powtarzającego się kodu ale także unikania powtarzających się czynności, które mogą zostać zautomatyzowane.
