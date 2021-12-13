@@ -18,12 +18,16 @@ This command will include **.js** and **.css** files for **Trix** and **Action T
 class Article < ApplicationRecord
   has_rich_text :content
 end
+```
 
+``` Ruby
 # Edit content
-<%= form_with model: article do |form| %>
+<% form_with model: article do |form| %>
   <%= form.rich_text_area :content %>
 <% end %>
+```
 
+``` Ruby
 # Display content
 <%= @article.content %>
 ```
