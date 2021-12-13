@@ -6,7 +6,9 @@
 
 To use image embedding and other attachments, **Active Storage** must be configured.
 
+```
 rails action_text: install
+```
 
 This command will include **.js** and **.css** files for **Trix** and **Action Text **
 
