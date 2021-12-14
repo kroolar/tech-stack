@@ -1,14 +1,14 @@
 # Active Record
 
-Active Record jest odpowiedzialny za reprezentowanie danych oraz ich logiki. Pozwala w prosty sposób korzystać z bazy danych.
+Active Record is responsible for representing the data and its logic. It allows you to easily use the database.
 
 ### Conventions
 
-Zgodnie z konwecjami używanymi w Railsach modele pow
+According to the conventions used in Rails, models should be named singular as opposed to table name, which is written in plural.
 
 ### CRUD
 
-ACtive REcord automatycznie tworzy metody, któ©e pozwalają zarządzać danymi na podstawie akronimu CRUD, który oznacza Create, Read, Update, Delete.
+Active Record automatically creates methods that allow you to manage data based on the acronym CRUD, which stands for Create, Read, Update, Delete.
 
 ``` Ruby
 # Create new user
@@ -26,7 +26,7 @@ user.destroy
 
 ### Validations
 
-Active Record zapewnia także walidację atrybutów dzięki czemu nie będziemy w stanie zapisać niepoprawnych danych do bazy danych. Poniższy przykład pokazujęwalidację, któ©a wymusza istnienie atrybutu name.
+Active Record also provides validation of attributes, thanks to which we will not be able to write incorrect data to the database. The following example shows a validation that forces the name attribute to exist.
 
 ``` Ruby
 class User < ApplicationRecord
@@ -37,7 +37,35 @@ user = User.new
 user.save # => false
 ```
 
-Powyższa akcja zwróci false ponieważ model nie spełnia walidacji. Istnieją też odpowiedniki z wykrzyknikiem, które zamiast false wyrzucą błąð.
+The above action will return false because the model fails the validation. There are also equivalents with an exclamation point that will return an error instead of false.
 
 ### Callbacks
+
+Callbacks are used to trigger specific actions during the model lifecycle.
+
 ### Migrations
+
+Active Record also introduces its own DSL to help manage the database schema.
+
+``` Ruby
+class CreatePublications < ActiveRecord::Migration[6.0]
+  def change
+    create_table :articles do |t|
+      t.string :title
+      t.text :description
+      t.timestamps
+    end
+    
+  end
+end
+```
+
+### Sources
+- https://guides.rubyonrails.org/active_record_basics.html
+- https://guides.rubyonrails.org/active_record_migrations.html
+- https://guides.rubyonrails.org/active_record_validations.html
+- https://guides.rubyonrails.org/active_record_callbacks.html
+- https://guides.rubyonrails.org/association_basics.html
+- https://guides.rubyonrails.org/active_record_querying.html
+- https://guides.rubyonrails.org/active_record_callbacks.html
+- https://api.rubyonrails.org/files/activerecord/README_rdoc.html
