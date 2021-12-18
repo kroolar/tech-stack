@@ -7,11 +7,10 @@
 
 ### <a name="overview">1. Overview</a>
 
-OOP to rodzaj programowania w którym programy definiuje się za pomocą obiektów. Programowanie obiektowy wprowadza trochę nowej terminologi:
-
+OOP is a type of programming where programs are defined by objects and the behavior between them. Object-oriented programming introduces some new terminology:
 
 #### Class
-Jest opisem(blueprint) na podstawie, którego można tworzyć obiekty
+It is a blueprint on the basis of which objects can be created.
 
 ``` Ruby
 class Car
@@ -19,14 +18,14 @@ end
 ```
 
 #### Object
-Obiekt jest podstawowym budulcem w językach obiektowych. W Ruby wszystko jest obiektem.
+The object is the basic building block in object-oriented languages. In Ruby, everything is an object.
 
 ``` Ruby
 car = Car.new
 ```
 
 #### Method
-Metoda jest właściwością obiektu, który określa jego zachowania.
+A method is a property of an object that determines its behavior.
 
 ``` Ruby
 class Car
@@ -39,7 +38,7 @@ car.drive
 ```
 
 #### Attributes
-Attrybuty są właściwośćią danego obiektu, który określa konkretny stan.
+Attributes are a property of a given object that determines a specific state.
 
 ``` Ruby
 class Car
@@ -55,14 +54,14 @@ bmw.brand # => "BMW"
 ```
 
 #### Instance
-Instancja jest określeniem danego obiektu w kontekście do jego klasy.(np. Obiekt BMW jest isntancją klasy Car)
+An instance is a definition of a given object in the context of its class. (E.g. a BMW object is an instance of class Car)
 
 ### <a name="fourPillars">2. Four Pillars</a>
 
 #### Encapsulation
-Jest procesem, który pozwala opakowywać pewne dane w pojedyncze jednostki.
+It is a process that allows certain data to be wrapped into separate entities.
 
-W poniższym przykładzie mamy jedną klasę App, która reprezentuje całą naszą aplikacje. Klasa ta posiada kilka metod odnoszących się do użytkowników oraz pracowników.
+In the example below, we have one App class that represents our entire application. This class has several methods related to users and employees.
 
 ``` Ruby
 class App
@@ -79,7 +78,7 @@ class App
   end
 end
 ```
-Powołując się na enkapsulacje możemy je podzielić na mniejsze jednostki
+When referring to encapsulations, we can divide them into smaller units.
 
 ``` Ruby
 class User
@@ -101,7 +100,7 @@ end
 
 #### Abstraction
 
-Abstrakcja pozwala ukryć detale, które nie są istotne takie jak implementacja i pokazać tylko te które są niezbędne. Użytkownik nie musi mieć dostepu do wszystkich części kodu wystarczy mu prosty interfejs z którego będzie korzystał.
+Abstraction allows you to hide details that are not important, such as implementation, and show only those that are necessary. The user does not have to have access to all parts of the code, he just needs a simple interface that he will use.
 
 ``` Ruby
 class CRM
@@ -123,7 +122,7 @@ class CRM
 end
 ```
 #### Inheritance
-Termin ten odnosi się do możliwośći dziedziczenia pwenych cech i właściwości z innych klas. Stworzymy klasę Car, i umieścimy w niej metodę odpowiedzialna za uruchomienie silnika.
+This term refers to the ability to inherit certain features and properties from other classes. We will create the Car class and include the method responsible for starting the engine in it.
 
 ``` Ruby
 class Car
@@ -133,9 +132,9 @@ class Car
 end
 ```
 
-Teraz natomiast chcemy utworzyć klasę motocykl, która także powinna zawierać metodę, która pozwoli na uruchomienie silnika. Oprócz tego chcemy także dodać metodę, która pozoli nam zatrzymać silnik.
+Now, however, we want to create a motorcycle class, which should also contain a method that will allow the engine to start. In addition to that, we also want to add a method that will allow us to stop the engine.
 
-Zamiast dodawać te same metody w dwóch róznych miejscach, możemy je wyeksportować do wspólnej klasy Vehcile, która będzie mogła przetrzymywać wartości wspólne dla wszystkch pojazdów, a następnie za pomocą dziedziczenia udostępnić jej metody klasą podrzednym.
+Instead of adding the same methods in two different places, we can export them to a common Vehcile class, which will be able to hold values common to all vehicles, and then use inheritance to share its methods with a child class.
 
 ``` Ruby
 class Vehicle
@@ -157,54 +156,38 @@ motorcycle = Motorcycle.new
 car.start_engine # => "The engine has started"
 motorcycle.stop_engine # => "The engine has stopped"
 ```
-W jezyku Ruby dostępne jest tylko pojedyncze dziedziczenie co oznacza, że klasą może odziedziczyć tylko i wyłącznie z jednego rodzica. Jednakże Ruby pozwala osiągnąć wielokrotne dziedzicznie dołączając moduły do danej klasy.
+
+In Ruby language, only single inheritance is available, which means that a class can only inherit from one parent. However, Ruby allows you to achieve multiple inheritance by attaching modules to a given class.
 
 #### Polymorphism
 
-Polimorfizm oznacza zdolność do przyjmowania wielu form. W kontekście programowania określa, że jedna czynność może być wykonywana na różne sposoby. W języku Ruby możemy osiągnąć polimorfizm na trzy różne sposoby
+Polymorphism means the ability to take many forms. In the context of programming, it specifies that one activity can be performed in different ways. In the example above, we have declared a method that starts the engine, and it can be used for both a motorcycle and a car.
 
-##### Inheritance
-
-``` Ruby
-class Vehicle
-  def type
-    raise NoImplementedError
-  end
-end
-
-class Car < Vehicle
-  def type
-    puts ''
-  end
-end
-
-class Motorcycle < Vehicle
-end
-```
-
-##### Duck Typing
 
 ### <a name="solid">3. SOLID</a>
 
 #### Single Responsibility Principle (SRP)
-Klasa powinna być oodpowieidzialny tylko i wyłącznie za jedną rzecz. Nie Powinien istnieć więcej niż jeden powód do modyfikacji klasy.
+A class should only be responsible for one thing. No There should be more than one reason to modify a class.
 
 #### Open/Closed Principle (OCP)
-Klasy powinny być otwarte na rozszerzenia i zamknięte na modyfikacje.
+Classes should be open to extensions and closed to modifications.
 
 #### Liskov Substitution Principle (LSP)
-Obiekty, które dziedzczą z klasy bazowej powinny być w stanie zastępować obiekty klasy bazowej bez zmiany działania programu.
+Objects that inherit from a base class should be able to replace base class objects without changing program behavior.
 
 #### Interface Segregation Principle (ISP)
+Clients should not be able to access methods that they do not use. Several smaller interfaces are better than one big one. By managing such access, any change to the interface, instead of all clients, will only apply to those affected by the change.
 
 #### Depedency Inversion Principle (DIP)
+
+Higher order objects should not depend on lower order objects. In the event of changes, this allows you to make changes only on the lower layers of the application, so that the higher layers can remain unchanged.
 
 ### <a name="principles">4. Principles</a>
 
 ### Law of Demether
-Czasem znana jako Principle of least knowledge. Określa, że obiekt powinien rozmawiać tylko i wyłącznie ze swoimi najlbiższymi obiektami. Obiekt nie powinien wykonywać metody prze inny obiekt.
+Sometimes known as Principle of least knowledge. Specifies that the object should talk only to its closest objects. The object should not execute the method by another object.
 
-W Rails przez asocjacje często tworzymy ogromne niepotrzebne łanuchy metod. Weźmy ten przykład.
+In Rails, we often create huge unnecessary method chains through associations. Let's take this example.
 
 ``` Ruby
 class User < ApplicationRecord
@@ -215,12 +198,13 @@ class Company < ApplicationRecord
   has_many :users
 end
 ```
-Comapny przechowuje swoją nazwę, więc jeśli chcemy wywołać nazwę firmy z poziomu użytkownika możemy to zrobić w taki sposób.
+Company stores its name, so if we want to call the company name from the user level, we can do it this way.
 
 ``` Ruby
 users.company.name
 ```
-To jest właśnie złamanie prawa Law of Demeter. Obiekt nie powinien kontaktować się z metodami innych obiektów. Jeśli chcemy pobrać nazwę firmy powinniśmy zrobić to w ten sposób.
+
+This is breaking the Law of Demeter. The object should not contact the methods of other objects. If we want to get a company name, we should do it this way.
 
 ``` Ruby
 class User < ApplicationRecord
@@ -234,7 +218,7 @@ end
 user.company_name
 ```
 
-Railsy dodatkowo są wyposażone w tzw. delegatory, które pozwalają skrócić ten zapis. Odpowiednikiem powyższego przykłądu jest ten poniżej
+Rails are additionally equipped with the so-called delegators that allow you to shorten this entry. The equivalent of the above example is the one below.
 
 ``` Ruby
 class User < ApplicationRecord
@@ -245,10 +229,16 @@ end
 ```
 
 ### KISS
-Keep It Simple, Stupid - Określa sposób projektowania w taki, żeby robić co jak najprośćiej, używająć jak naprostszych narzędzi bez żadnych udziwnień taka, żeby struktura nie zawierała niepotrzebnych elementów oraz, żeby każdy nawet najmniej uzdolniony z zespołu mógł to zrozumieć.
+Keep It Simple, Stupid - It determines the way of designing in such a way as to do what is as simple as possible, use simple tools without any freaks, so that the structure does not contain unnecessary elements and that even the least talented of the team can understand it.
 
 ### YAGNI
-You Aren't Gonna Need It - Odnośi się do nie tworzenia niepotrzebnego kodu. Czasem może się wydawać, że jakaś implementacja ma sens i może się przydać w przyszłości ale okazuje się, że jest nie działa zvyt dobrze, lub jest całkowicie niepotrzebna przez co trzeba refaktorować kod lub całkowicie go usunąc. Dlatego metoda ta mówi o tym, żeby odkładać pisanie kodu na później.
+You Aren't Gonna Need It - Refers to not creating redundant code. Sometimes it may seem that an implementation makes sense and may be useful in the future, but it turns out that it does not work well, or is completely unnecessary, so you have to refactor the code or remove it completely. Therefore, this method is about putting off writing code until later.
 
 ### DRY
-Don't Repeat Yourself - Jak sama nazwa wskazuje odnosi się do tego, żeby sie nie powtarzać. Nie chodzi tu tylko o unikanie pisania powtarzającego się kodu ale także unikania powtarzających się czynności, które mogą zostać zautomatyzowane.
+Don't Repeat Yourself - As the name suggests, it does not mean repeating itself. It is not only about avoiding writing redundant code but also avoiding repetitive activities that can be automated.
+
+### Composition over Inheritance
+The rule is to give preference to composition over inheritance. By using inheritance, we provide the derived class with the entire interface of the base class. In the case of compositions, we can only use what we need, thanks to which we reduce the coupling between these classes.
+
+### Encapsulate what varies
+You should isolate pieces of code that may change separately. Thanks to this, when changing something in one fragment, we do not have to change anything in the other.
