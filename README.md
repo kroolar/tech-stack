@@ -16,3 +16,6 @@
 - [OOP](https://github.com/kroolar/tech-stack/blob/master/software-design/oop.md)
 - [Design Patterns](https://github.com/kroolar/tech-stack/blob/master/software-design/design-patterns.md)
 - [Architectures](https://github.com/kroolar/tech-stack/blob/master/software-design/architectures.md)
+
+### Linux
+- [Terminal](https://github.com/kroolar/tech-stack/blob/master/linux/terminal.md)
