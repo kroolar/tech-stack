@@ -1,5 +1,7 @@
 # Monolith
 
+![image](https://user-images.githubusercontent.com/48235197/147384255-431a5994-198f-4a08-9f0f-d6e78f9a1d7b.png)
+
 ### Pros
 - Global availability of all code
 - Little configuration
