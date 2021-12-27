@@ -84,3 +84,44 @@ sudo -s przełącza na roota
 
 Wszystko jest plikiem
 Wirtualne konsoeltki
+
+### Manipulowanie plikami i katalogami
+### Wieloznacziki
+* Pasuje do dowolych znaków
+? Pasuje do dowolnego pojedynczego znaku
+[znaki] Pasuje do dowolnego znaku wchodzdącego w skład zestawu znaki
+[!znaki] Pasuje do dowolnego znaku który nie wchodzi w skład
+[[:klasa]] Pasuje do dowolnego znaku wchodzącego w skład klasy
+
+[:digit] Do dowolnej liczby
+[:lower] Dowolna mała litera
+
+mkdir tworzenie folderów
+
+cp -r --recursive kopiuje katalogi i ich zawatość
+
+mv zmiana nazwy albo przenoszenie
+
+rm usuwanie
+
+
+Czym jest polecenie
+- Programem znajdującym się w katalogu usr/bin
+- Poleceniem wbudowanym w samą powłoke
+- Funkcją powłoki?
+- Aliasem
+
+Type pozwala sprawdzić czym jest polecenie
+
+Which sprawdzamy gdzie jest zlokalizowany rogram
+
+
+help cd
+cd --help
+man cd
+whatis cd
+info ruby
+
+Możemy dodawać średnik między poleceniami
+
+alias pokazuje wszystkie aliase
