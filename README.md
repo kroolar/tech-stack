@@ -17,5 +17,6 @@
 - [Design Patterns](https://github.com/kroolar/tech-stack/blob/master/software-design/design-patterns.md)
 - [Architectures](https://github.com/kroolar/tech-stack/blob/master/software-design/architectures.md)
 
+### Docker
+
 ### Linux
-- [Terminal](https://github.com/kroolar/tech-stack/blob/master/linux/terminal.md)
