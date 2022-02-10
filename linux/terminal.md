@@ -116,8 +116,157 @@ r - do odczytywania pliku
 w - do modyfikacji pliku
 x - do uruchamiania pliku
 
+Przechodzenie między katalogami
 
+cd
+cd ~
+cd /
+cd ..
 
+Tworzenie katalogów
+mkdir katalog
+
+Z prawami
+mkdir -m 111 kat
+
+Z opisem
+-v, --verbose
+
+Usuwanie
+rmdir
+
+rmdir --verbose
+
+rm -R
+
+Tworzeni plików touch
+
+Usuwanie plików
+rm
+-r, -R --recursive
+
+-f, --force
+
+pyta o usuniecie
+
+-v, --verbose
+
+Wyswietlanie zawartosci pliku
+
+cat plik1 plik2 
+
+touch-a zmienia czas dostatniego dostepu
+
+Kopiowanie
+cp plik1 katalog
+z inna nazwa 
+cp plik1 katalog/plik2
+
+PRzenoszenie i zmiana nazwy
+mv
+
+Nadawanie praw dostepu
+
+chmod 777 nazwa
+4 - r
+2 - w
+1 - x
+
+Bit lepkości
+Nadanie takiego bitu skutkuje tym, że tylko właściciel pliku oraz root mogą go usunać
+
+chmod +t nazwa
+
+chmod -t nazwa
+
+drwxrwxr-t
+
+alias
+pokazuje aliasy
+
+passwd
+zmiana hasła
+
+passwd username
+
+Zmiana powłoki"
+
+```
+$ sh
+$ bash 
+```
+
+informacje o typie pliku *
+
+zminaa wlasciciela grupy
+
+chwob wlasciciel:grupa plik
+
+Wyszukiwanie 
+find ./ -name 'p*'
+-depth
+
+Informacje o ilości wolnego miejsca
+df
+
+Ile miejsca zajume element
+
+du plik
+more i less edytory
+
+czyszcenie clear
+
+aktualna sciezka pwd
+
+przelaczenie na ine kont 
+
+su root
+
+informacje o sprzeice procek
+arch
+
+uname -a, --all
+informacje os przeciae
+
+info o uzytkowniku
+
+finger name
+
+kto jest obecnie zalogowany
+w
+
+pamiec systemowa
+free
+
+cal
+
+date
+
+last ostatnio zalogowani uzytkownicy
+
+who kto jest aktualnie zalogwany
+users, who
+
+informacja o nszym loginie who am i, whoami
+
+nazwa hosta 
+hostname
+
+paramtery intefejsu siecowego
+ifconfig
+
+nazaw lub adrs ip
+host www.helion.pl
+-a
+
+whois www.helion.pl
+sprawdzenie czy dana domena jest juz alogowana
+
+sprawdzenia dostepnosci ping helion.pl
+
+uptime czas od uruchomienia syste,y
+
+-i, --interactive
 Co to jest linux?
 Co to jest powłoka?
 Co robi terminal? Udsotępnia powłoke w GUI
