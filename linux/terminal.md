@@ -123,8 +123,11 @@ cd ~
 cd /
 cd ..
 
-Tworzenie katalogów
-mkdir katalog
+Tworzenie nowego katalogu
+
+```
+$ mkdir katalog
+```
 
 Z prawami
 mkdir -m 111 kat
@@ -189,7 +192,7 @@ zmiana hasła
 
 passwd username
 
-Zmiana powłoki"
+Zmiana powłoki terminala:
 
 ```
 $ sh
@@ -216,21 +219,24 @@ more i less edytory
 
 czyszcenie clear
 
-aktualna sciezka pwd
+Sprawdzenie aktualnej ścieżki:
 
-przelaczenie na ine kont 
+```
+$ pwd
+```
 
-su root
+Przełączanie na inne konto: 
 
-informacje o sprzeice procek
-arch
+```
+$ su root
+```
 
-uname -a, --all
-informacje os przeciae
+Informacje o sprzęcie:
 
-info o uzytkowniku
-
-finger name
+```
+$ uname -a
+$ uname --all
+```
 
 kto jest obecnie zalogowany
 w
@@ -437,3 +443,33 @@ Nie określamy rozszerzeń tylko nagłówki MIME
 [admin@linux /]$ - uzytkownik@host znak zachęty($ - zwyczajny, # - root) / - katalog bieżący
 
 W
+
+ADministrowanie systemu
+wysiwtlanie informacji o dzilajacych uslugach
+
+dodawanie uzytkownikow
+adduser nazwa
+
+dodawaniae gtup
+
+groupadd
+
+procesy dzialajace 
+top
+
+echo
+
+ssh
+'history
+
+pierwze linie tekstu
+head plik.txt
+
+ostatnie 
+
+tail
+
+statystyki
+stat plik.txt
+
+grep 12 plik.txt
