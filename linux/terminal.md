@@ -473,3 +473,44 @@ statystyki
 stat plik.txt
 
 grep 12 plik.txt
+
+
+1. Czym jest powłoka?
+
+Powłoka to program, który pomaga się komunikować z systememe operacyjnym.
+
+```
+$ date
+$ cal
+```
+
+Ilość wolnego miejsca na dysku
+
+```
+df
+```
+
+Wolna pamięć operacyjna:
+```
+$ free
+```
+
+Wyjście z terminala:
+```
+$ exit
+```
+
+Konsole wirtualne działają w tle
+Ctrl+Alt+F1 - F6
+PRzełączanie Alt i np. F5
+ALT + F7 wyjscie
+
+2. Nawigacja
+
+Bieżący katalog roboczy
+znak zahęty $, #
+pwd, ls, cd
+
+ściżka względna 
+ściezak bezwzgędna /
+folder uzytkownika ~, ~name
