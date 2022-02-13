@@ -1,87 +1,5 @@
 # Terminal
 
-### Wyświetlanie zawartośći katalogu
-
-```console
-ls
-dir
-```
-
-Szczegółowe informacje o katalogu:
-
-``` console
-ls -l
-vdir
-```
-
-Wyświetla wszystkie pliki i katalogi(nawet te ukryte):
-
-``` console
-ls -a
-```
-
-Podobnie jak powyższa komenda wyświetla wszystkie pliki i katalogi ale dodatkowo pomija katalog bieżący(.) i nadrzędny(..):
-
-``` console
-ls -A
-```
-
-Pomija wyświetlanie kopii zapasowych:
-
-``` console
-ls -B
-```
-
-Pomija elementy pasujące do danego wzorca. W tym przypadku wszystkie elementy zaczynające się na literę "p":
-
-``` console
-ls -I "p*"
-ls --ignore="p*"
-```
-
-Pokazuje wszystkie katalogi pasujące do danego wzorca. W tym przypadku pokazuję wszystkie elementy rozpoczynające się na literę "D":
-
-``` console
-ls D*
-```
-
-Pokazuje wszystkie katalogi i podkatalogi:
-
-``` console
-ls -R
-ls --recursive
-```
-
-Odwraca kolejność zwracanej listy:
-
-``` console
-ls -r
-ls --reverse
-```
-
-Sortuje według wielkości pliku:
-
-``` console
-ls -S
-ls --sort=size
-```
-
-Sortuje według czasu utworzenia:
-
-``` console
-ls -t
-ls --sort=time
-```
-
-Pomija sortowanie:
-
-``` console
-ls -U
-ls --sort=none
-```
-
-
-
 ### Typy elementów
 
 | Znak | Opis                   |
@@ -155,9 +73,11 @@ cp plik1 katalog/plik2
 PRzenoszenie i zmiana nazwy
 mv
 
-Nadawanie praw dostepu
+### Nadawanie praw dostepu
+```
+$ chmod 777 nazwa_elementu
+```
 
-chmod 777 nazwa
 4 - r
 2 - w
 1 - x
@@ -170,9 +90,6 @@ chmod +t nazwa
 chmod -t nazwa
 
 drwxrwxr-t
-
-alias
-pokazuje aliasy
 
 passwd
 zmiana hasła
@@ -196,84 +113,54 @@ Wyszukiwanie
 find ./ -name 'p*'
 -depth
 
-Informacje o ilości wolnego miejsca
-df
-
 Ile miejsca zajume element
 
 du plik
 more i less edytory
 
-czyszcenie clear
-
-Sprawdzenie aktualnej ścieżki:
-
-```
-$ pwd
-```
-
 Przełączanie na inne konto: 
-
 ```
 $ su root
 ```
 
-Informacje o sprzęcie:
+| POLECENIE | OPIS |
+|-----------|------|
+| w                 | Wyświetla kto jest obecnie zalogowany |
+| free              | Wyświetla zużycie pamięci operacyjnej   |
+| cal               | Wyświetla kalendarz |
+| date              | Wyświetla aktualną date |
+| last              | Wyświetla ostatnio zalogowanych użytkowników |
+| user, who         | Wyświetla aktualnie zalogowanych użytkowników |
+| whoami            | Wyświetla informacje o użytkowniku |
+| hostname          | Wyświetla nazwe hosta |
+| ifconfig          | Wyświetla parametru interfejsu sieciowego |
+| host _adres_strony_ | Wyświetla adres ip podanej strony |
+| ping _adres_strony_ | Sprawdza czy domena odpowiada |
+| uptime | Wyświetla czas od uruchomienia strony |
+| uname -a | Wyświetla informacje o sprzęcie |
+| type _polecenie_ | Wyświetla typ polecenia |
+| which _polecenie_ | Wyświetla lokalizacje pliku |
+| help _polecenie_ | Wyświetla pomoc dla poleceń wbudowanych w powłoke |
+| man _polecenie_ | Wyświetla podręcznik programu |
+| whatis _polecenie_ | Wyświetla jednowierwszowy opis polecenia |
+| exit | Kończy sesje |
+| df | Wyświetla dostępne miejsce na dysku |
+| alias | Wyświetla aktualnie zdefiniowane aliasy |
+| history | Wyświetla historie ostatnich poleceń |
+| head _nazwa_pliku_ | Domyślnie wyświetla pierwsze 10 linii tekstu |
+| tail _nazwa_pliku_ | Domyślnie wyświetla ostatnie 10 linii tekstu |
+| pwd | Wyświetla aktualną ścieżke |
+| clear | Czyści konsole |
 
-```
-$ uname -a
-$ uname --all
-```
+Często używane opcje
+-h
+-i
 
-kto jest obecnie zalogowany
-w
-
-pamiec systemowa
-free
-
-cal
-
-date
-
-last ostatnio zalogowani uzytkownicy
-
-who kto jest aktualnie zalogwany
-users, who
-
-informacja o nszym loginie who am i, whoami
-
-nazwa hosta 
-hostname
-
-paramtery intefejsu siecowego
-ifconfig
-
-nazaw lub adrs ip
-host www.helion.pl
--a
-
-whois www.helion.pl
-sprawdzenie czy dana domena jest juz alogowana
-
-sprawdzenia dostepnosci ping helion.pl
-
-uptime czas od uruchomienia syste,y
-
--i, --interactive
 Co to jest linux?
 Co to jest powłoka?
 Co robi terminal? Udsotępnia powłoke w GUI
 
 Wirtualne konsole
-
-date
-
-cal
-
-### Free disc space
-df wolne miejsce na dysku
-free wolna pamięć operacyujna
-exit koniec sesji
 
 Nawigacja
 Hierarchia jest inna niż w windows gdzie każdy dysk ma swoją nazwe tu jest jeden root
@@ -325,15 +212,6 @@ Wszystko jest plikiem
 Wirtualne konsoeltki
 
 ### Manipulowanie plikami i katalogami
-### Wieloznacziki
-* Pasuje do dowolych znaków
-? Pasuje do dowolnego pojedynczego znaku
-[znaki] Pasuje do dowolnego znaku wchodzdącego w skład zestawu znaki
-[!znaki] Pasuje do dowolnego znaku który nie wchodzi w skład
-[[:klasa]] Pasuje do dowolnego znaku wchodzącego w skład klasy
-
-[:digit] Do dowolnej liczby
-[:lower] Dowolna mała litera
 
 mkdir tworzenie folderów
 
@@ -343,28 +221,7 @@ mv zmiana nazwy albo przenoszenie
 
 rm usuwanie
 
-
-Czym jest polecenie
-- Programem znajdującym się w katalogu usr/bin
-- Poleceniem wbudowanym w samą powłoke
-- Funkcją powłoki?
-- Aliasem
-
-Type pozwala sprawdzić czym jest polecenie
-
-Which sprawdzamy gdzie jest zlokalizowany rogram
-
-
-help cd
-cd --help
-man cd
-whatis cd
-info ruby
-
 Możemy dodawać średnik między poleceniami
-
-alias pokazuje wszystkie aliase
-
 
 BIOS?
 UEFI?
@@ -388,9 +245,6 @@ sda
 ...
 
 
-man
-
-Nie określamy rozszerzeń tylko nagłówki MIME
 
 [admin@linux /]$ - uzytkownik@host znak zachęty($ - zwyczajny, # - root) / - katalog bieżący
 
@@ -412,47 +266,18 @@ top
 echo
 
 ssh
-'history
 
-pierwze linie tekstu
-head plik.txt
-
-ostatnie 
-
-tail
 
 statystyki
 stat plik.txt
 
 grep 12 plik.txt
 
+0. Overview
 Wszystko jest plikiem, nawet urządzenia
-
+Nie określamy rozszerzeń tylko nagłówki MIME
 
 1. Czym jest powłoka?
-
-Powłoka to program, który pomaga się komunikować z systememe operacyjnym.
-
-```
-$ date
-$ cal
-```
-
-Ilość wolnego miejsca na dysku
-
-```
-df
-```
-
-Wolna pamięć operacyjna:
-```
-$ free
-```
-
-Wyjście z terminala:
-```
-$ exit
-```
 
 Konsole wirtualne działają w tle
 Ctrl+Alt+F1 - F6
@@ -471,9 +296,32 @@ folder uzytkownika ~, ~name
 
 3. Przegląd systemu
 
-Wyśeitlanie katalogów
+### Wyświetlanie zawartośći katalogu
 ```
 $ ls
+```
+
+| OPCJA | DŁUGA OPCJA | OPIS
+|-------|-------------|
+| -a    | --all            | Wypisuje wszystkie elementy(nawet te ukryte)
+| -A    | --almost-all     | Działa podobnie jak powyższa opcja ale nie wyświetla bieżącego katalogu (.), ani katalogu nadrzędnego (..) |
+| -l    |                  | Wyświetla listę w długim formacie
+| -R    | --recursive      | Wyświetla wszystkie katalogi i podkatalogi
+| -r    | --reverse        | Wyświetla listę w odwrotnej kolejności
+| -S    | --sort=size      | Sortuje listę na podstawie rozmiaru plików
+| -t    | --sort=time      | Sortuje listę na podstawie czasu modyfikacji
+| -U    | --sort=none      | Nie sortuje listy
+
+Pomija elementy pasujące do danego wzorca. W tym przypadku wszystkie elementy zaczynające się na literę "p":
+``` console
+ls -I "p*"
+ls --ignore="p*"
+```
+
+Pokazuje wszystkie katalogi pasujące do danego wzorca. W tym przypadku pokazuję wszystkie elementy rozpoczynające się na literę "D":
+
+``` console
+ls D*
 ```
 
 ### Szczegółowe informacje  elementach
@@ -584,32 +432,4 @@ rm -r katalog
 - Funkcją powłoki
 - Aliasem
 
-### Wyświetlanie typu polecenia
-```
-$ type polecenie
-```
 
-### Wyświetlanie lokalizacji pliku
-```
-$ which polecenie
-```
-
-### Uzykiwanie pomocy dla poleceń wbudowanych w powłoke
-```
-$ help polecenie
-```
-
-### Wyświetlanie informacji o użyciu
-```
-$ mkdir --help
-```
-
-### Wyświetlanie podręcznika programu
-```
-$ man program
-```
-
-### Wyświetlanie jednowierszowego opisu
-```
-$ whatis polecenie
-```
