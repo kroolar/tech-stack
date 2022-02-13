@@ -116,41 +116,41 @@ find ./ -name 'p*'
 Ile miejsca zajume element
 
 du plik
-more i less edytory
 
 Przełączanie na inne konto: 
 ```
 $ su root
 ```
 
-| POLECENIE | OPIS |
-|-----------|------|
-| w                 | Wyświetla kto jest obecnie zalogowany |
-| free              | Wyświetla zużycie pamięci operacyjnej   |
-| cal               | Wyświetla kalendarz |
-| date              | Wyświetla aktualną date |
-| last              | Wyświetla ostatnio zalogowanych użytkowników |
-| user, who         | Wyświetla aktualnie zalogowanych użytkowników |
-| whoami            | Wyświetla informacje o użytkowniku |
-| hostname          | Wyświetla nazwe hosta |
-| ifconfig          | Wyświetla parametru interfejsu sieciowego |
+| POLECENIE           | OPIS |
+|---------------------|------|
+| w                   | Wyświetla kto jest obecnie zalogowany |
+| free                | Wyświetla zużycie pamięci operacyjnej   |
+| cal                 | Wyświetla kalendarz |
+| date                | Wyświetla aktualną date |
+| last                | Wyświetla ostatnio zalogowanych użytkowników |
+| user, who           | Wyświetla aktualnie zalogowanych użytkowników |
+| whoami              | Wyświetla informacje o użytkowniku |
+| hostname            | Wyświetla nazwe hosta |
+| ifconfig            | Wyświetla parametru interfejsu sieciowego |
 | host _adres_strony_ | Wyświetla adres ip podanej strony |
 | ping _adres_strony_ | Sprawdza czy domena odpowiada |
-| uptime | Wyświetla czas od uruchomienia strony |
-| uname -a | Wyświetla informacje o sprzęcie |
-| type _polecenie_ | Wyświetla typ polecenia |
-| which _polecenie_ | Wyświetla lokalizacje pliku |
-| help _polecenie_ | Wyświetla pomoc dla poleceń wbudowanych w powłoke |
-| man _polecenie_ | Wyświetla podręcznik programu |
-| whatis _polecenie_ | Wyświetla jednowierwszowy opis polecenia |
-| exit | Kończy sesje |
-| df | Wyświetla dostępne miejsce na dysku |
-| alias | Wyświetla aktualnie zdefiniowane aliasy |
-| history | Wyświetla historie ostatnich poleceń |
-| head _nazwa_pliku_ | Domyślnie wyświetla pierwsze 10 linii tekstu |
-| tail _nazwa_pliku_ | Domyślnie wyświetla ostatnie 10 linii tekstu |
-| pwd | Wyświetla aktualną ścieżke |
-| clear | Czyści konsole |
+| uptime              | Wyświetla czas od uruchomienia strony |
+| uname -a            | Wyświetla informacje o sprzęcie |
+| type _polecenie_    | Wyświetla typ polecenia |
+| which _polecenie_   | Wyświetla lokalizacje pliku |
+| help _polecenie_    | Wyświetla pomoc dla poleceń wbudowanych w powłoke |
+| man _polecenie_     | Wyświetla podręcznik programu |
+| whatis _polecenie_  | Wyświetla jednowierwszowy opis polecenia |
+| exit                | Kończy sesje |
+| df                  | Wyświetla dostępne miejsce na dysku |
+| alias               | Wyświetla aktualnie zdefiniowane aliasy |
+| history             | Wyświetla historie ostatnich poleceń |
+| head _nazwa_pliku_  | Domyślnie wyświetla pierwsze 10 linii tekstu |
+| tail _nazwa_pliku_  | Domyślnie wyświetla ostatnie 10 linii tekstu |
+| pwd                 | Wyświetla aktualną ścieżke |
+| clear               | Czyści konsole |
+| less                | Program do wyświetlania zawartośći pliku
 
 Często używane opcje
 -h
@@ -202,13 +202,10 @@ Nazwy plików w linuxie nie muszą odzwierciedlac typu pliku.
 
 File pokazuje krótki opis zawartości pliku
 
-less progrma ktory pozwala odpalac teskty
-
 Dowiązania symboliczne i twarde?
 
 sudo -s przełącza na roota
 
-Wszystko jest plikiem
 Wirtualne konsoeltki
 
 ### Manipulowanie plikami i katalogami
@@ -244,8 +241,6 @@ Kanały SCSI?
 sda
 ...
 
-
-
 [admin@linux /]$ - uzytkownik@host znak zachęty($ - zwyczajny, # - root) / - katalog bieżący
 
 W
@@ -267,11 +262,12 @@ echo
 
 ssh
 
-
 statystyki
 stat plik.txt
 
 grep 12 plik.txt
+
+
 
 0. Overview
 Wszystko jest plikiem, nawet urządzenia
@@ -301,16 +297,16 @@ folder uzytkownika ~, ~name
 $ ls
 ```
 
-| OPCJA | DŁUGA OPCJA | OPIS
-|-------|-------------|
-| -a    | --all            | Wypisuje wszystkie elementy(nawet te ukryte)
-| -A    | --almost-all     | Działa podobnie jak powyższa opcja ale nie wyświetla bieżącego katalogu (.), ani katalogu nadrzędnego (..) |
-| -l    |                  | Wyświetla listę w długim formacie
-| -R    | --recursive      | Wyświetla wszystkie katalogi i podkatalogi
-| -r    | --reverse        | Wyświetla listę w odwrotnej kolejności
-| -S    | --sort=size      | Sortuje listę na podstawie rozmiaru plików
-| -t    | --sort=time      | Sortuje listę na podstawie czasu modyfikacji
-| -U    | --sort=none      | Nie sortuje listy
+| OPCJA | DŁUGA OPCJA      | OPIS                                                                                                        |
+|-------|------------------|-------------------------------------------------------------------------------------------------------------|
+| -a    | --all            | Wypisuje wszystkie elementy(nawet te ukryte)                                                                |
+| -A    | --almost-all     | Działa podobnie jak powyższa opcja ale nie wyświetla bieżącego katalogu (.), ani katalogu nadrzędnego (..)  |
+| -l    |                  | Wyświetla listę w długim formacie                                                                           |
+| -R    | --recursive      | Wyświetla wszystkie katalogi i podkatalogi                                                                  |
+| -r    | --reverse        | Wyświetla listę w odwrotnej kolejności                                                                      |
+| -S    | --sort=size      | Sortuje listę na podstawie rozmiaru plików                                                                  |
+| -t    | --sort=time      | Sortuje listę na podstawie czasu modyfikacji                                                                |
+| -U    | --sort=none      | Nie sortuje listy                                                                                           |
 
 Pomija elementy pasujące do danego wzorca. W tym przypadku wszystkie elementy zaczynające się na literę "p":
 ``` console
@@ -330,24 +326,15 @@ $ ls -l
 $ drwxr-xr-x 2 user user 4096 Feb 9 10:26 Desktop
 ```
 
-Znaczenie poszczególnych kolumn:
-1. Typ elementu i prawa dostępu(drwxr-xr-x)
-2. Liczba doowiązań(2)
-3. Właściciel(user)
-4. Grupa przypisana do elementu(user)
-5. Rozmiar elementu w bajtach (4096)
-6. Data ostatniej modyfikacji (Feb 9 10:26)
-7. Nazwa elementu (Desktop)
-
-Sprawdzanie typu pliku:
-```
-$ type nazwa_pliku
-```
-
-Wyświetlanie zawartości pliku:
-```
-$ less nazwa_pliku
-```
+| Kolumna | Wartość     | Opis                         |
+|---------|-------------|------------------------------|
+| 1       | drwxr-xr-x  | Typ elementu i prawa dostępu |
+| 2       | 2           | Liczba dowiązań              |
+| 3       | user        | Nazwa właściciela            |
+| 4       | user        | Nazwa grupy                  |
+| 5       | 4096        | Rozmiar elementu w bajtach   |
+| 6       | Feb 9 10:26 | Data ostatniej modyfikacji   |
+| 7       | Desktop     | Nazwa elementu               |
 
 ### Struktura katalogów:
 
