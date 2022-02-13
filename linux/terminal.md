@@ -80,41 +80,28 @@ ls -U
 ls --sort=none
 ```
 
-### Szczegółowe informacje  elementach
-``` console
-$ ls -l
-$ drwxr-xr-x 2 user user 4096 Feb 9 10:26 Desktop
-```
 
-Znaczenie poszczególnych kolumn:
-1. Typ elementu i prawa dostępu(drwxr-xr-x)
-2. Liczba powiązań(2)
-3. Właściciel(user)
-4. Grupa przypisana do elementu(user)
-5. Rozmiar elementu (4096)
-6. Data modyfikacji (Feb 9 10:26)
-7. Nazwa elementu (Desktop)
 
-Typy elementów
-- - zwykły plik
-b - specjalny znak blokowy
-c - specjalny plik znakowy
-d - katalog
-l - dowiązanie symboliczne
-p - nazwany potok
-s - gniazdo
+### Typy elementów
 
-Prawa dostępu
+| Znak | Opis                   |
+|------| -----------------------|
+| -    | Zwykły plik            |
+| b    | Specjalny znak blokowy |
+| c    | Specjalny plik znakowy |
+| d    | Katalog                |
+| l    | Dowiązanie symboliczne |
+| p    | Nazwany potok          |
+| s    | Gniazdo                |
+
+### Prawa dostępu
 użytkownik-grupa-inni
-dal katalogów
-r = do przeszukania zawartości
-w - do zmiany zawartości
-x - do wejścia do katalogu
 
-Dla plików
-r - do odczytywania pliku
-w - do modyfikacji pliku
-x - do uruchamiania pliku
+| Znak | Opis dla katalogów         | Opis dla plików |
+|------|----------------------------|-----------------|
+| r    | Do przeszukania zawartości | Do odczytywania |
+| w    | Do zmiany zawartości       | Do modyfikacji  |
+| x    | Do wejścia do katalogu     | Do uruchamiania |
 
 Przechodzenie między katalogami
 
@@ -330,27 +317,6 @@ File pokazuje krótki opis zawartości pliku
 
 less progrma ktory pozwala odpalac teskty
 
-
-Katalogi
-/ katalog główny
-/bin pliki binarne(programy) niezbędne do działania systemu
-/boot Jądro linuksa oraz program rozruchowy(grub)
-/dev wężly urządzeń. Wszystkie urządzenia jako pliki
-/etc ogólnosystemowe pliki konfoguracyjne np. crontab
-/home każdy użytkownik otrrzymuje tu swój folder
-/lib biblioteki
-/lost+found Jeśli nic sie nie dzieje jest pusty. Wykorzystywany do odzyskiwania plików po awariach
-/media nośniki wymienne zamontowane automatycznie
-/mnt nośniki wymienne zamontowane ręcznie
-/opt Opcjonalene oprogramowanie
-/proc Pliki które pokazują jak linuks widzi nasz komputer
-/root katalog domowy głównego użytkownika(roota)
-/sbin pliki binarne systemu
-/tmp pliki tymczasowe tworzone przez różne programy
-/usr wszystkie programy
-/var miejsce przeechowywania danych, bazy danych, kolejki, poczta
-
-
 Dowiązania symboliczne i twarde?
 
 sudo -s przełącza na roota
@@ -406,20 +372,6 @@ GNOME
 bash
 linux@linux $ - znak zachet
 
-Katalogi
-bin - programy dostępne dla użytkowników systemu
-dev - urządzenia blokowe i znakowe
-etc - pliki konfiguracyjne systemu
-home - katalogi główne użytkowników
-lib - pliki bibliotek dla programów
-mnt - montowane dyski
-proc - informacje o systemie
-root - katalog użytkownika root
-sbin - progamy specjalne dla użytkowników o odpowiednich uprawnieniach
-tmp - pliki tymczasowe
-usr - programy
-var - katalog do przechowywanie potrzebnych ,u danych
-
 Dyski i partycje
 Kanały IDE?
 hda - pierwszy kontroler IDE, Master
@@ -474,6 +426,8 @@ stat plik.txt
 
 grep 12 plik.txt
 
+Wszystko jest plikiem, nawet urządzenia
+
 
 1. Czym jest powłoka?
 
@@ -514,3 +468,148 @@ pwd, ls, cd
 ściżka względna 
 ściezak bezwzgędna /
 folder uzytkownika ~, ~name
+
+3. Przegląd systemu
+
+Wyśeitlanie katalogów
+```
+$ ls
+```
+
+### Szczegółowe informacje  elementach
+``` console
+$ ls -l
+$ drwxr-xr-x 2 user user 4096 Feb 9 10:26 Desktop
+```
+
+Znaczenie poszczególnych kolumn:
+1. Typ elementu i prawa dostępu(drwxr-xr-x)
+2. Liczba doowiązań(2)
+3. Właściciel(user)
+4. Grupa przypisana do elementu(user)
+5. Rozmiar elementu w bajtach (4096)
+6. Data ostatniej modyfikacji (Feb 9 10:26)
+7. Nazwa elementu (Desktop)
+
+Sprawdzanie typu pliku:
+```
+$ type nazwa_pliku
+```
+
+Wyświetlanie zawartości pliku:
+```
+$ less nazwa_pliku
+```
+
+### Struktura katalogów:
+
+| Katalog       | Opis                                                                                   |
+| ------------- | ---------------------------------------------------------------------------------------|
+| /             | Katalog główny                                                                         |
+| /bin          | Pliki binarne(programy)                                                                |
+| /boot         | Jądro linuksa oraz program rozruchowy                                                  |
+| /dev          | Węzły urządzeń                                                                         |
+| /etc          | Pliki konfiguracyjne                                                                   |
+| /home         | Katalogi główne użytkowników                                                           |
+| /lib          | Biblioteki używane przez programy                                                      |
+| /lost + found | Wykorzystywanyy w przypadku częściowego po uszkodzeniu pliku                           |
+| /media        | Punkty montowanie nośników wymiennych zamontowanych automatycznie                      |
+| /mnt          | Punkty montowanie nośników wymiennych zamontowanych ręcznie                            |
+| /opt          | Opcjonalne oprogramowanie                                                              |
+| /proc         | Wirtualny system, który pozwala uzyskać informacje o systemie                          |
+| /root         | Katalog domowy głównego użytkownika                                                    |
+| /sbin         | Specjalne pliki binarne(programy) do uzytku głównie dla użytkownia uprzywilejowanego   |
+| /tmp          | Pliki tymczasowe                                                                       |
+| /usr          | Programy wykorzystywane przez użytkowników                                             |
+| /var          | Miejsce przechowywanie dynamicznych danych tj. bazy danych, pliki kolejek, poczta itp. |
+
+
+### Wieloznaczniki:
+
+| Wieloznacznik | Znaczenie                                                            |
+| ------------- | -------------------------------------------------------------------- |
+| *             | Pasuje do dowolnych _znaków_                                         |
+| ?             | Pasuje do dowolnego pojedynczego _znaku_                             |
+| [znaki]       | Pasuje do dowolnegowchodzącego w skład zestawu _znaki_               |
+| [!znaki]      | Pasuje do dowolnego znaku, który nie wchodzi w skład zestawu _znaki_ |
+| [[:klasa:]]   | Pasuje do dowolnego znaku wchodzącego w skład określonej _klasy_     |
+
+
+### Klasy znaczników
+
+| Znacznik  | Znaczenie                                  |
+|-----------|--------------------------------------------|
+| [:alnum:] | Pasuje do dowolnego znaku alfanumerycznego |
+| [:alpha:] | Pasuje do dowolnego znaku alfabetycznego   |
+| [:digit:] | Pasuje do dowolnej liczby                  |
+| [:lower:] | Pasuje do dowolnej małej litery            |
+| [:upper:] | Pasuje do dowolnej wielkiej litery         |
+
+
+### Tworzenie katalogów:
+
+```
+$ mkdir nazwa_katalogu
+```
+
+### Kopiowanie
+
+```
+$ cp element1 element2
+```
+
+### Przenoszenie plików lub zmiana nazwy
+
+```
+$ mv element1 element2
+```
+
+### Usuwanie elementów
+
+Usuwanie plików:
+```
+rm plik
+```
+
+Usuwanie katalogów:
+```
+rm -r katalog
+```
+
+5. Polecenia
+
+### Czym są polecenia?
+- Programem wykonywalnym
+- Poleceniem wbudowanym
+- Funkcją powłoki
+- Aliasem
+
+### Wyświetlanie typu polecenia
+```
+$ type polecenie
+```
+
+### Wyświetlanie lokalizacji pliku
+```
+$ which polecenie
+```
+
+### Uzykiwanie pomocy dla poleceń wbudowanych w powłoke
+```
+$ help polecenie
+```
+
+### Wyświetlanie informacji o użyciu
+```
+$ mkdir --help
+```
+
+### Wyświetlanie podręcznika programu
+```
+$ man program
+```
+
+### Wyświetlanie jednowierszowego opisu
+```
+$ whatis polecenie
+```
