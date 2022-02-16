@@ -3,6 +3,10 @@
 ### Linux
 10. [Procesy](https://github.com/kroolar/tech-stack/blob/master/linux/terminal/processes.md)
 
+### Konfiguracja i środowisko
+11. [Środowisko](https://github.com/kroolar/tech-stack/blob/master/linux/terminal/environment.md)
+
+
 
 # Terminal
 
