@@ -2,9 +2,6 @@
 
 Środowiskiem możemy nazwać zestaw informacji na temat sesji powłoki. Środowisko przechowywuje dwa typy danych: _zmienne środowiskowe_ oraz _zmienne powłoki_. Oprócz tego powłoka przechowuje także _aliasy_, _dane programowalne_ oraz _funkcje powłoki_.
 
-- [Przeglądanie środowiska](#one)
-- [Konfiguracja środowiska](#two)
-
 ### <a name="one">Przeglądanie środowiska</a>
 Polecenie _set_ wyświetla zmienne środowiskowe, zmienne powłoki oraz funkcje powłoki.
 ```
