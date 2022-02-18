@@ -5,6 +5,11 @@
 
 ### Konfiguracja i środowisko
 11. [Środowisko](https://github.com/kroolar/tech-stack/blob/master/linux/terminal/environment.md)
+13. [Znak zachęty](https://github.com/kroolar/tech-stack/blob/master/linux/terminal/prompt.md)
+
+### Popularne zadania i podstawowe narzędzia
+14. [Pakiety](https://github.com/kroolar/tech-stack/blob/master/linux/terminal/packages.md)
+
 
 
 
