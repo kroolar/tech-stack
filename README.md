@@ -24,3 +24,6 @@
 
 ### Security
 - [Authentications](https://github.com/kroolar/tech-stack/blob/master/security/authentications.md)
+
+### Internet
+- [Authentications](https://github.com/kroolar/tech-stack/blob/master/internet/dns.md)
