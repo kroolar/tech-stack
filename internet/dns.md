@@ -1,6 +1,9 @@
 # DNS
 DNS lets users connect to websites using domain names instead of IP addresses.
 
+### What is a domain
+It is readable text that is associated with a given IP address. Any internet user can register their own domain name.
+
 ### DNS Infrastructure Servers
 #### DNS Recursor
 Responsible for receiving requests from the client and returning the ip address. For this purpose, it must communicate with other servers.
