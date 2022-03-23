@@ -1,42 +1,52 @@
 # Domain Name
-
-Do połączenia do konkretnego serwisu internetowego przeglądarka w rzeczywistości potrzebuje jego adres IP. Wpisywanie adresu IP w przeglądarce nie jest zbyt czytelnym rozwiązaniem dlatego korzystając z przeglądarki używa się czytelnego tekstu. I tym własnie jest nazwa domeny, konkretną nazwą połączoną z konkretnym adresem IP.
+In order to establish a connection between the browser and the website, we need to enter the server's IP address. In fact, this approach is not used very often as IP addresses are not human readable. Therefore, we use plain text in the browser. This is what we call a domain name, i.e. a specific name associated with a specific IP address.
 
 ### How it works
 
-Po wpisaniu nazwy domenny przeglądarka wysyła zpaytanie do DNS. Ten ma za zadanie znaleźć adres IP przypisany do podanej domeny, a następnie zwrócić go do naszej przeglądarki. Proces ten nazywa się DNS lookup.
+After entering the domain name, the browser sends a query to DNS. This one is to find the IP address assigned to the given domain, and then return it to our browser. This process is called DNS lookup.
 
-### Struktura domeny
+### Domain structure
+A domain usually consists of two or three members.
 
-Domena zazwyczaj składa się z dwóch lub trzech członów.
+`developer.mozilla.org`
 
-developer.mozilla.org
+#### Top-Level Domain(TLD)
+The first from the right is the so-called **top-level domain** and it defines the main purpose of the website, e.g. _.gov(government website)_ or _.edu(education website)_. It can also stand for a specific language or its server location, e.g. _.pl_ or _.en_.
 
-Top-Level Domain
-  .org
+#### Second-Level Domain(2LD)
+The second part of the address is usually your domain name.
+
+`mozilla.com`
+
+#### Third-Level Domain(3LD)
+Sometimes, however, both the operation of the website and its location are used, in which case your domain name will be in the third position from the right.
+
+`mozilla.co.uk`
+ 
+#### Subdomain
+Sometimes, in addition to the root domain, you also need to create subdomains. In this case, the names of these subdomains will be the main name of your domain.
+
+`dev.mozilla.co.uk`
+ 
+### How to buy a domain?
+You can't actually buy a domain. In fact, you can buy the right to use the domain for a specific period of time. Of course, if the period is over, you have the right to re-buy it first, but if you don't, someone else will be able to use your domain.
+ 
+### Registrar
+It is a company that deals with the reservation of domains and the assignment of IP addresses for these domain names. 
+
+### How to check a domain
+Using the command line, it is very easy to see who the domain currently belongs to.
+```
+whois google.com
+```
+ 
+### Who is managing domains?
+ICANN a non-profit organization that helps coordinate the Domain Name System
+ 
+### DNS refreshing
+DNS databases are stored on servers around the world. Therefore, each creation of a new domain or updating their value must be entered in each database. Therefore, it takes a while for the DNS server to refresh the current information.
   
-  Mówi nam o głównym przeznaczeniu strony np.
-    - .gov - dla organizacji rządowych
-    - .edu - do celów edukacyjnyhc
-    
-  Lub informacji o języku strony lub lokalizacji jego serwera
-  
- 
- 
- Label (or component)
- Następne części są nazywane labelami albo komponentami. Twoja witryna może składać się z więcej niż jengeo komponentu.
- 
- Jak kupić domene
- W rzeczywistości nie można kupić domeny. Tak naprawdę można wykupić prawo do używania domeny na określony czas. Oczywiście w przypadku skońćzenia okresu masz prawo pierwokupu ale jeśli tego nie zrobisz ktoś inny będzie mógł używac twojej domeny.
- 
- Jak sprawdzić domene
- 
- ```
- whois google.com
- ```
- 
- Kto zarząda domenami?
- 
- 
- 
- 
+#### More
+- https://developer.mozilla.org/en-US/docs/Learn/Common_questions/What_is_a_domain_name
+- https://www.cloudflare.com/en-gb/learning/dns/glossary/what-is-a-domain-name/
+- https://www.cloudflare.com/learning/dns/glossary/what-is-a-domain-name-registrar/
