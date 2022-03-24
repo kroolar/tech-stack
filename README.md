@@ -28,3 +28,4 @@
 ### Internet
 - [DNS](https://github.com/kroolar/tech-stack/blob/master/internet/dns.md)
 - [Domain Name](https://github.com/kroolar/tech-stack/blob/master/internet/domain-name.md)
+- [Hosting](https://github.com/kroolar/tech-stack/blob/master/internet/hosting.md)
